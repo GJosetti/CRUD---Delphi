@@ -11,8 +11,9 @@ type
   Tf_Main = class(TForm)
     p_Main: TPanel;
     p_Estudante: TPanel;
-    Button1: TButton;
+    btn_Estudantes: TButton;
     procedure FormCreate(Sender: TObject);
+    procedure btn_EstudantesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,9 +28,11 @@ implementation
 
 {$R *.dfm}
 
+var sManager : TScreenManager;
+
 procedure Tf_Main.FormCreate(Sender: TObject);
 
-var sManager : TScreenManager;
+
 
 begin
 
@@ -41,6 +44,32 @@ begin
 end;
 
 
+
+
+
+procedure Tf_Main.btn_EstudantesClick(Sender: TObject);
+var sToHide: TScreenState;
+begin
+  sToHide := sManager.getActualScreen;
+  sManager.setActualScreen(etEstudante);
+
+end;
+
+
+
+
+
+
+
+
+
+
+procedure ChangeScreen(aScreenToHide: TScreenState);
+begin
+
+
+
+end;
 
 
 

@@ -1,7 +1,7 @@
 unit u_ScreenManager;
 
 interface
-
+uses System.Generics.Collections;
 
 type TScreenState = (etMain, etEstudante, etProfessor, etDisciplina, etTurma, etMatricula);
 
@@ -9,9 +9,12 @@ type TScreenState = (etMain, etEstudante, etProfessor, etDisciplina, etTurma, et
 
 type TScreenManager = class
 
+//ScreenMap : TDictionary<TScreenManager, >
+
 
 private
 ActualScreen : TScreenState;
+
 
 public
 function getActualScreen: TScreenState;

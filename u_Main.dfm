@@ -22,10 +22,6 @@ object f_Main: Tf_Main
     ShowCaption = False
     TabOrder = 1
     Visible = False
-    ExplicitLeft = 432
-    ExplicitTop = 368
-    ExplicitWidth = 185
-    ExplicitHeight = 41
   end
   object p_Main: TPanel
     Left = 0
@@ -36,17 +32,20 @@ object f_Main: Tf_Main
     Color = 15189402
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 400
-    ExplicitTop = 360
-    ExplicitWidth = 185
-    ExplicitHeight = 41
-    object Button1: TButton
-      Left = 480
-      Top = 352
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
+    object btn_Estudantes: TButton
+      Left = 784
+      Top = 136
+      Width = 145
+      Height = 65
+      Caption = 'Estudantes'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 0
+      OnClick = btn_EstudantesClick
     end
   end
 end
