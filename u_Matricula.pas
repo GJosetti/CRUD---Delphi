@@ -5,11 +5,12 @@ uses u_ID;
 
 type TMatricula = class(TID)
 
+  private
   IDTurma : Integer;
   IDEstudante : Integer;
 
 
-
+  public
   function getIDTurma : Integer;
   procedure setIDTurma (aID: Integer);
 

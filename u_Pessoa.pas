@@ -6,8 +6,10 @@ uses u_ID;
 
 type TPessoa = class(TID)
 
+  private
   Nome : string;
 
+  public
   function getNome : String;
   procedure setNome(aNome: String);
 

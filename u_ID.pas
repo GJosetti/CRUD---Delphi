@@ -4,11 +4,14 @@ interface
 
 type TID = class
 
+  private
   Codigo : Integer;
 
-
+  public
   function GetCodigo: Integer;
   procedure SetCodigo(aID: Integer);
+
+  constructor Create(aID: Integer);
 
 
 end;
@@ -18,6 +21,11 @@ end;
 
 
 implementation
+
+constructor TID.Create(aID: Integer);
+begin
+  Self.Codigo := aID;
+end;
 
 { ID }
 

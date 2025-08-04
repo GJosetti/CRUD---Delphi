@@ -5,8 +5,10 @@ uses u_ID;
 
 type TDisciplina = class(TID)
 
+  private
   Nome: String;
 
+  public
   function getNome : String;
   procedure setNome(aNome: String);
 

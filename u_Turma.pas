@@ -5,9 +5,12 @@ uses u_ID;
 
 type TTurma = class (TID)
 
+  private
   IDProfessor : Integer;
   IDDisciplina: Integer;
 
+
+  public
   function GetIDProfessor: Integer;
   procedure SetIDProfessor(aID: Integer);
 

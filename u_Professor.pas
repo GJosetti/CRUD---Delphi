@@ -5,8 +5,10 @@ uses u_Pessoa;
 
 type TProfessor = class(TPessoa)
 
+  private
   Cpf: String;
 
+  public
   function getCpf: String;
   procedure setCpf (aCpf: String);
 
