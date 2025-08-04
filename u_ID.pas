@@ -4,11 +4,11 @@ interface
 
 type TID = class
 
-Codigo : Integer;
+  Codigo : Integer;
 
 
-function GetCodigo: Integer;
-procedure SetCodigo(aID: Integer);
+  function GetCodigo: Integer;
+  procedure SetCodigo(aID: Integer);
 
 
 end;
