@@ -40,6 +40,9 @@ begin
 
   sManager.setActualScreen(etMain);
 
+  sManager.ScreenMap.Create;
+  sManager.ScreenMap.Add(etMain,p_Main);
+  sManager.ScreenMap.Add(etEstudante,p_Estudante);
 
 end;
 
@@ -48,9 +51,11 @@ end;
 
 
 procedure Tf_Main.btn_EstudantesClick(Sender: TObject);
-var sToHide: TScreenState;
+//var sToChange: TScreenState;
+var sToHide : TScreenState;
 begin
-  sToHide := sManager.getActualScreen;
+  sToHide:= sManager.getActualScreen;
+  sManager.ChangeScreen(etEstudante,sToHide);
   sManager.setActualScreen(etEstudante);
 
 end;
@@ -63,13 +68,6 @@ end;
 
 
 
-
-procedure ChangeScreen(aScreenToHide: TScreenState);
-begin
-
-
-
-end;
 
 
 
