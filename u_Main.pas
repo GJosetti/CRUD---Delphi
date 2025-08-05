@@ -5,22 +5,33 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections  ;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante;
 
 type
   Tf_Main = class(TForm)
     p_Main: TPanel;
     p_Estudante: TPanel;
     btn_Estudantes: TButton;
-    Button1: TButton;
+    btn_Back: TButton;
+    lstB_e_Nome: TListBox;
+    lstB_e_ID: TListBox;
+    btn_Adicionar: TButton;
+    pnl_inputE: TPanel;
+    edt_nome_E: TEdit;
+    lbl_edt_nome_E: TLabel;
+    lbl_pnl_inputE: TLabel;
+    btn_concluir_inputE: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btn_BackClick(Sender: TObject);
+    procedure btn_concluir_inputEClick(Sender: TObject);
+    procedure btn_AdicionarClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     var sToHide : TScreenState;
+    var estudantesList : TObjectList<TEstudante>;
   end;
 
 var
@@ -34,7 +45,12 @@ implementation
 
 var sManager : TScreenManager;
 
-procedure Tf_Main.Button1Click(Sender: TObject);
+procedure Tf_Main.btn_AdicionarClick(Sender: TObject);
+begin
+  pnl_inputE.Visible := true;
+end;
+
+procedure Tf_Main.btn_BackClick(Sender: TObject);
 begin
 
   sToHide:= sManager.getActualScreen;
@@ -43,19 +59,41 @@ begin
 
 end;
 
-procedure Tf_Main.FormCreate(Sender: TObject);
-
-
-
+procedure Tf_Main.btn_concluir_inputEClick(Sender: TObject);
+var newEstudante : TEstudante;
 begin
 
-  sManager := TScreenManager.Create;
+  newEstudante := TEstudante.Create(estudantesList.Count + 1);
+  newEstudante.setNome(edt_nome_E.Text);
 
-  sManager.setActualScreen(etMain);
+  estudantesList.Add(newEstudante);
 
-  sManager.ScreenMap := TDictionary<TScreenState, TPanel>.Create;
-  sManager.ScreenMap.Add(etMain,p_Main);
-  sManager.ScreenMap.Add(etEstudante,p_Estudante);
+  lstB_e_Nome.Items.Add(newEstudante.getNome);
+  lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+
+  pnl_inputE.Visible := false;
+  edt_nome_E.Text := '';
+
+end;
+
+
+
+procedure Tf_Main.FormCreate(Sender: TObject);
+begin
+
+
+  //Estudantes List
+    estudantesList := TObjectList<TEstudante>.Create;
+
+  //ScrenManager
+    sManager := TScreenManager.Create;
+    sManager.setActualScreen(etMain);
+    sManager.ScreenMap := TDictionary<TScreenState, TPanel>.Create;
+    sManager.ScreenMap.Add(etMain,p_Main);
+    sManager.ScreenMap.Add(etEstudante,p_Estudante);
+
+
+
 
 end;
 
@@ -73,7 +111,12 @@ begin
 end;
 
 
-
+//procedure showPanel (aPanel: TPanel);
+//begin
+//
+//  aPanel.Visible := true;
+//
+//end;
 
 
 

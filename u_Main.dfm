@@ -29,7 +29,7 @@ object f_Main: Tf_Main
       Caption = 'Estudantes'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -24
+      Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
@@ -47,14 +47,103 @@ object f_Main: Tf_Main
     ShowCaption = False
     TabOrder = 1
     Visible = False
-    object Button1: TButton
-      Left = 648
-      Top = 152
-      Width = 137
-      Height = 57
-      Caption = 'Main'
+    ExplicitLeft = 16
+    object btn_Back: TButton
+      Left = 16
+      Top = 16
+      Width = 153
+      Height = 65
+      Caption = 'Voltar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 0
-      OnClick = Button1Click
+      OnClick = btn_BackClick
+    end
+    object lstB_e_Nome: TListBox
+      Left = 408
+      Top = 192
+      Width = 201
+      Height = 249
+      ItemHeight = 15
+      TabOrder = 1
+    end
+    object lstB_e_ID: TListBox
+      Left = 370
+      Top = 192
+      Width = 39
+      Height = 249
+      Enabled = False
+      ExtendedSelect = False
+      ItemHeight = 15
+      TabOrder = 2
+    end
+    object btn_Adicionar: TButton
+      Left = 376
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Adicionar'
+      TabOrder = 3
+      OnClick = btn_AdicionarClick
+    end
+    object pnl_inputE: TPanel
+      Left = 322
+      Top = 192
+      Width = 343
+      Height = 185
+      TabOrder = 4
+      Visible = False
+      object lbl_edt_nome_E: TLabel
+        Left = 24
+        Top = 67
+        Width = 93
+        Height = 14
+        Caption = 'Digite seu nome:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_pnl_inputE: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 16
+        Width = 335
+        Height = 16
+        Margins.Top = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Cadastro de Estudante'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 149
+      end
+      object edt_nome_E: TEdit
+        Left = 24
+        Top = 87
+        Width = 121
+        Height = 23
+        TabOrder = 0
+      end
+      object btn_concluir_inputE: TButton
+        Left = 256
+        Top = 152
+        Width = 75
+        Height = 25
+        Caption = 'Concluir'
+        TabOrder = 1
+        OnClick = btn_concluir_inputEClick
+      end
     end
   end
 end
