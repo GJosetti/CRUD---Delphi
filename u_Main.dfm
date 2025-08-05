@@ -12,17 +12,6 @@ object f_Main: Tf_Main
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object p_Estudante: TPanel
-    Left = 0
-    Top = 0
-    Width = 1035
-    Height = 734
-    Align = alClient
-    Caption = 'p_Estudante'
-    ShowCaption = False
-    TabOrder = 1
-    Visible = False
-  end
   object p_Main: TPanel
     Left = 0
     Top = 0
@@ -46,6 +35,26 @@ object f_Main: Tf_Main
       ParentFont = False
       TabOrder = 0
       OnClick = btn_EstudantesClick
+    end
+  end
+  object p_Estudante: TPanel
+    Left = 0
+    Top = 0
+    Width = 1035
+    Height = 734
+    Align = alClient
+    Caption = 'p_Estudante'
+    ShowCaption = False
+    TabOrder = 1
+    Visible = False
+    object Button1: TButton
+      Left = 648
+      Top = 152
+      Width = 137
+      Height = 57
+      Caption = 'Main'
+      TabOrder = 0
+      OnClick = Button1Click
     end
   end
 end

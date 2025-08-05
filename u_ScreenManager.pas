@@ -35,6 +35,7 @@ begin
   var sTH: TPanel;
 
 
+
   ScreenMap.TryGetValue(aScreenToHide, sTH);
   sTH.Visible := false;
 
