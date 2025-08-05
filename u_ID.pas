@@ -4,7 +4,7 @@ interface
 
 type TID = class
 
-  private
+  protected
   Codigo : Integer;
 
   public
@@ -13,7 +13,7 @@ type TID = class
 
   constructor Create(aID: Integer);
 
-
+  property ID: Integer read GetCodigo write SetCodigo;
 end;
 
 

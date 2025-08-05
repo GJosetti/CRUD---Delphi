@@ -6,13 +6,14 @@ uses u_ID;
 
 type TPessoa = class(TID)
 
-  private
-  Nome : string;
+  protected
+  nome : string;
 
   public
   function getNome : String;
   procedure setNome(aNome: String);
 
+  property pNome: String read getNome write setNome;
 
 end;
 
@@ -22,12 +23,12 @@ implementation
 
 function TPessoa.getNome: String;
 begin
-  Result := Self.Nome;
+  Result := Self.nome;
 end;
 
 procedure TPessoa.setNome(aNome: String);
 begin
-  Self.Nome := aNome;
+  Self.nome := aNome;
 end;
 
 end.
