@@ -32,6 +32,7 @@ type
     { Public declarations }
     var sToHide : TScreenState;
     var estudantesList : TObjectList<TEstudante>;
+    jsonStr: string;
   end;
 
 var
@@ -73,6 +74,8 @@ begin
 
   pnl_inputE.Visible := false;
   edt_nome_E.Text := '';
+
+  jsonStr := TJson.ObjectToJsonString(estudantesList);
 
 end;
 
