@@ -78,8 +78,8 @@ begin
   pnl_inputE.Visible := false;
   edt_nome_E.Text := '';
 
-  jsonStr := TJson.ObjectToJsonString(estudantesList);
 
+  jsonStr := TJson.ObjectToJsonString(estudantesList);
   TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt',jsonStr);
 
 end;
@@ -93,18 +93,25 @@ begin
   //Estudantes List
 
 
-  if(Assigned(estudantesList)) then
+  if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt')) then
   begin
 
-   jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt');
-
-  end else begin
-
-    estudantesList := TObjectList<TEstudante>.Create;
-
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt');
+    estudantesList := TJson.JsonToObject<TObjectList<TEstudante>>(jsonStr);
   end;
 
-  estudantesList := TJson.JsonToObject<TObjectList<TEstudante>>(jsonStr);
+
+  if not (Assigned(estudantesList)) then
+  begin
+
+      estudantesList := TObjectList<TEstudante>.Create;
+  end;
+
+
+
+
+
+
 
 
 
