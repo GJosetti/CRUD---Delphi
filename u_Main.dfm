@@ -144,5 +144,14 @@ object f_Main: Tf_Main
         OnClick = btn_concluir_inputEClick
       end
     end
+    object btn_delete_E: TButton
+      Left = 496
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Remover'
+      TabOrder = 5
+      OnClick = btn_delete_EClick
+    end
   end
 end

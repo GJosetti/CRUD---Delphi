@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,  System.JSON, Rest.Json,  System.IOUtils;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,  System.JSON, Rest.Json,  System.IOUtils, u_ID;
 
 type
   Tf_Main = class(TForm)
@@ -21,13 +21,16 @@ type
     lbl_edt_nome_E: TLabel;
     lbl_pnl_inputE: TLabel;
     btn_concluir_inputE: TButton;
+    btn_delete_E: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_BackClick(Sender: TObject);
     procedure btn_concluir_inputEClick(Sender: TObject);
     procedure btn_AdicionarClick(Sender: TObject);
+    procedure btn_delete_EClick(Sender: TObject);
   private
     { Private declarations }
+    procedure UpdateEstudanteList;
   public
     { Public declarations }
     var sToHide : TScreenState;
@@ -63,25 +66,42 @@ begin
 
 end;
 
+
+
 procedure Tf_Main.btn_concluir_inputEClick(Sender: TObject);
 var newEstudante : TEstudante;
 begin
 
+
+  if estudantesList.Count > 0 then begin
+  
+  
+
+    newEstudante := TEstudante.Create(estudantesList.Last.GetCodigo + 1);
+    newEstudante.setNome(edt_nome_E.Text);
+
+    estudantesList.Add(newEstudante);
+
+    lstB_e_Nome.Items.Add(newEstudante.getNome);
+    lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+
+  end else begin
   newEstudante := TEstudante.Create(estudantesList.Count + 1);
-  newEstudante.setNome(edt_nome_E.Text);
+    newEstudante.setNome(edt_nome_E.Text);
 
-  estudantesList.Add(newEstudante);
+    estudantesList.Add(newEstudante);
 
-  lstB_e_Nome.Items.Add(newEstudante.getNome);
-  lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+    lstB_e_Nome.Items.Add(newEstudante.getNome);
+    lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+  
+  end;
+    pnl_inputE.Visible := false;
+    edt_nome_E.Text := '';
 
-  pnl_inputE.Visible := false;
-  edt_nome_E.Text := '';
 
-
-  jsonStr := TJson.ObjectToJsonString(estudantesList);
-  TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt',jsonStr);
-
+    UpdateEstudanteList();
+    
+  
 end;
 
 
@@ -90,9 +110,8 @@ procedure Tf_Main.FormCreate(Sender: TObject);
 
 begin
 
-  //Estudantes List
 
-
+  //Instanciando Listas
   if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt')) then
   begin
 
@@ -107,14 +126,6 @@ begin
       estudantesList := TObjectList<TEstudante>.Create;
   end;
 
-
-
-
-
-
-
-
-
   //ScrenManager
     sManager := TScreenManager.Create;
     sManager.setActualScreen(etMain);
@@ -125,11 +136,20 @@ begin
 
 
 
+ //   WindowState := TWindowState.wsMaximized;
 end;
 
 
 
 
+
+
+
+procedure Tf_Main.UpdateEstudanteList();
+begin
+  jsonStr := TJson.ObjectToJsonString(estudantesList);
+  TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt',jsonStr);
+end;
 
 procedure Tf_Main.btn_EstudantesClick(Sender: TObject);
 
@@ -141,34 +161,45 @@ begin
   sManager.setActualScreen(etEstudante);
 
 
-  if(Assigned(estudantesList)) then begin
 
+  if(estudantesList.Count > 0)  then begin
 
-    if(estudantesList.Count > 0)  then begin
-
-    for i := 0 to estudantesList.Count - 1 do
-      begin
-        lstB_e_Nome.Items.Add(estudantesList[i].getNome);
-        lstB_e_ID.Items.Add(estudantesList[i].GetCodigo.ToString);
-      end;
+  for i := 0 to estudantesList.Count - 1 do
+    begin
+      lstB_e_Nome.Items.Add(estudantesList[i].getNome);
+      lstB_e_ID.Items.Add(estudantesList[i].GetCodigo.ToString);
     end;
   end;
+
 
 end;
 
 
 
 
+procedure Tf_Main.btn_delete_EClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+
+
+  selectedItem := lstB_e_Nome.ItemIndex;
+  if (selectedItem <> -1) then
+  begin
+
+
+    estudantesList.Delete(selectedItem);
+
+
+    lstB_e_Nome.DeleteSelected;
+    lstB_e_ID.Items.Delete(selectedItem);
+
+    UpdateEstudanteList;
+
+  end;
 
 
 
-//procedure showPanel (aPanel: TPanel);
-//begin
-//
-//  aPanel.Visible := true;
-//
-//end;
-
+end;
 
 
 
