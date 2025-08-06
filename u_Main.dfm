@@ -47,7 +47,6 @@ object f_Main: Tf_Main
     ShowCaption = False
     TabOrder = 1
     Visible = False
-    ExplicitLeft = 16
     object btn_Back: TButton
       Left = 16
       Top = 16
