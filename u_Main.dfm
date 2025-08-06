@@ -81,7 +81,7 @@ object f_Main: Tf_Main
       TabOrder = 2
     end
     object btn_Adicionar: TButton
-      Left = 376
+      Left = 310
       Top = 472
       Width = 99
       Height = 33
@@ -145,13 +145,22 @@ object f_Main: Tf_Main
       end
     end
     object btn_delete_E: TButton
-      Left = 496
+      Left = 440
       Top = 472
       Width = 99
       Height = 33
       Caption = 'Remover'
       TabOrder = 5
       OnClick = btn_delete_EClick
+    end
+    object btn_Edit_E: TButton
+      Left = 578
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Editar'
+      TabOrder = 6
+      OnClick = btn_Edit_EClick
     end
   end
 end
