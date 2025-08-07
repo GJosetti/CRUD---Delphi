@@ -1,1 +1,1 @@
-{"ownsObjects":true,"listHelper":[{"nome":"b","codigo":2},{"nome":"c","codigo":3},{"nome":"d","codigo":4}]}
+{"ownsObjects":true,"listHelper":[]}

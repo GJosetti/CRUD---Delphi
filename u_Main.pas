@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,  System.JSON, Rest.Json,  System.IOUtils, u_ID;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager;
+
+
 
 type
   Tf_Main = class(TForm)
@@ -50,12 +52,17 @@ implementation
 {$R *.dfm}
 
 var sManager : TScreenManager;
+var iManager : TInputManager;
 
+
+//ADICIONAR ALUNO
 procedure Tf_Main.btn_AdicionarClick(Sender: TObject);
 begin
   pnl_inputE.Visible := true;
+  iManager.ActualState := etAdd;
 end;
 
+//VOLTAR PARA O MENU
 procedure Tf_Main.btn_BackClick(Sender: TObject);
 begin
 
@@ -69,7 +76,7 @@ begin
 end;
 
 
-
+//CONCLUIR ADIÇÃO OU EDIÇÃO
 procedure Tf_Main.btn_concluir_inputEClick(Sender: TObject);
 var newEstudante : TEstudante;
 begin
@@ -85,7 +92,7 @@ begin
       lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
 
     end else begin
-    newEstudante := TEstudante.Create(estudantesList.Count + 1);
+      newEstudante := TEstudante.Create(estudantesList.Count + 1);
       newEstudante.setNome(edt_nome_E.Text);
 
       estudantesList.Add(newEstudante);
@@ -98,7 +105,7 @@ begin
       edt_nome_E.Text := '';
 
 
-    UpdateEstudanteList();
+      UpdateEstudanteList();
     
   
 end;
