@@ -135,6 +135,7 @@
         <DCCReference Include="u_Turma.pas"/>
         <DCCReference Include="u_Matricula.pas"/>
         <DCCReference Include="u_ScreenManager.pas"/>
+        <DCCReference Include="u_InputManager.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

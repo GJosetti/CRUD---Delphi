@@ -81,37 +81,53 @@ procedure Tf_Main.btn_concluir_inputEClick(Sender: TObject);
 var newEstudante : TEstudante;
 begin
 
-  
-    if estudantesList.Count > 0 then begin
-      newEstudante := TEstudante.Create(estudantesList.Last.GetCodigo + 1);
-      newEstudante.setNome(edt_nome_E.Text);
+    if(iManager.ActualState = etAdd) then
+    begin
 
-      estudantesList.Add(newEstudante);
 
-      lstB_e_Nome.Items.Add(newEstudante.getNome);
-      lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
 
-    end else begin
-      newEstudante := TEstudante.Create(estudantesList.Count + 1);
-      newEstudante.setNome(edt_nome_E.Text);
+      if estudantesList.Count > 0 then begin
+        newEstudante := TEstudante.Create(estudantesList.Last.GetCodigo + 1);
+        newEstudante.setNome(edt_nome_E.Text);
 
-      estudantesList.Add(newEstudante);
+        estudantesList.Add(newEstudante);
 
-      lstB_e_Nome.Items.Add(newEstudante.getNome);
-      lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
-  
+        lstB_e_Nome.Items.Add(newEstudante.getNome);
+        lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+
+      end else begin
+        newEstudante := TEstudante.Create(estudantesList.Count + 1);
+        newEstudante.setNome(edt_nome_E.Text);
+
+        estudantesList.Add(newEstudante);
+
+        lstB_e_Nome.Items.Add(newEstudante.getNome);
+        lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+
+      end;
+    end else if (iManager.ActualState = etEdit) then
+    begin
+
+      var selectedItem: Integer;
+      begin
+        selectedItem := lstB_e_Nome.ItemIndex;
+
+        estudantesList[selectedItem].setNome(edt_nome_E.Text);
+        lstB_e_Nome.Items[selectedItem] := edt_nome_E.Text;
+
+      end;
     end;
-      pnl_inputE.Visible := false;
-      edt_nome_E.Text := '';
 
 
-      UpdateEstudanteList();
-    
+    pnl_inputE.Visible := false;
+    edt_nome_E.Text := '';
+    UpdateEstudanteList();
+
   
 end;
 
 
-
+//FORM CREATE
 procedure Tf_Main.FormCreate(Sender: TObject);
 
 begin
@@ -139,33 +155,31 @@ begin
     sManager.ScreenMap.Add(etMain,p_Main);
     sManager.ScreenMap.Add(etEstudante,p_Estudante);
 
+  //InputManager
+  iManager := TInputManager.Create;
 
 
 
- //   WindowState := TWindowState.wsMaximized;
+
 end;
 
-
-
-
-
-
-
+//DAR UPDATE NO ARQUIVO ESTUDANTES JSON
 procedure Tf_Main.UpdateEstudanteList();
 begin
   jsonStr := TJson.ObjectToJsonString(estudantesList);
   TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt',jsonStr);
 end;
 
+//EDITAR ALUNO
 procedure Tf_Main.btn_Edit_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
   selectedItem := lstB_e_Nome.ItemIndex;
-
+  iManager.ActualState := etEdit;
   if(selectedItem <> -1)then
   begin
     pnl_inputE.Visible := true;
-   // edt_nome_E := 
+    edt_nome_E.Text := estudantesList[selectedItem].getNome;
   end;
 
 
@@ -173,6 +187,7 @@ begin
 
 end;
 
+//ENTRAR NA PÁGINA DE ESTUDANTES
 procedure Tf_Main.btn_EstudantesClick(Sender: TObject);
 
 var i : Integer;
@@ -184,9 +199,10 @@ begin
 
 
 
-  if(estudantesList.Count > 0)  then begin
+  if(estudantesList.Count > 0)  then
+  begin
 
-  for i := 0 to estudantesList.Count - 1 do
+    for i := 0 to estudantesList.Count - 1 do
     begin
       lstB_e_Nome.Items.Add(estudantesList[i].getNome);
       lstB_e_ID.Items.Add(estudantesList[i].GetCodigo.ToString);
@@ -198,29 +214,20 @@ end;
 
 
 
-
+//DELETAR ALUNO
 procedure Tf_Main.btn_delete_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
-
-
   selectedItem := lstB_e_Nome.ItemIndex;
   if (selectedItem <> -1) then
   begin
-
-
     estudantesList.Delete(selectedItem);
-
 
     lstB_e_Nome.DeleteSelected;
     lstB_e_ID.Items.Delete(selectedItem);
 
     UpdateEstudanteList;
-
   end;
-
-
-
 end;
 
 

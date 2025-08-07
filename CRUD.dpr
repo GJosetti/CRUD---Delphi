@@ -10,7 +10,8 @@ uses
   u_Disciplina in 'u_Disciplina.pas',
   u_Turma in 'u_Turma.pas',
   u_Matricula in 'u_Matricula.pas',
-  u_ScreenManager in 'u_ScreenManager.pas';
+  u_ScreenManager in 'u_ScreenManager.pas',
+  u_InputManager in 'u_InputManager.pas';
 
 {$R *.res}
 
