@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager, u_JsonManager;
 
 
 
@@ -56,14 +56,12 @@ type
     procedure btn_Remover_PClick(Sender: TObject);
   private
     { Private declarations }
-    procedure UpdateEstudanteList;
-    procedure UpdateProfessoresList;
+    
   public
     { Public declarations }
     var sToHide : TScreenState;
-    var estudantesList : TObjectList<TEstudante>;
-    var professoresList : TObjectList<TProfessor>;
-    jsonStr: string;
+   
+
   end;
 
 var
@@ -77,6 +75,7 @@ implementation
 
 var sManager : TScreenManager;
 var iManager : TInputManager;
+var jManager : TjManager;
 
 
 //ADICIONAR ALUNO
@@ -152,7 +151,7 @@ begin
 
     pnl_inputE.Visible := false;
     edt_nome_E.Text := '';
-    UpdateEstudanteList();
+    jManager.UpdateEstudanteList();
     iManager.ActualState := etBrowsing;
   
 end;
@@ -205,7 +204,7 @@ begin
     pnl_inputP.Visible := false;
     edt_nome_P.Text := '';
     edt_CPF_P.Text := '';
-    UpdateProfessoresList();
+    jManager.UpdateProfessoresList();
     iManager.ActualState := etBrowsing;
 
 
@@ -252,26 +251,16 @@ begin
 
   //InputManager
   iManager := TInputManager.Create;
-end;
+
+  //JsonManager
+  jManager := TjManager.Create;
+  end;
 
 procedure Tf_Main.ListBox1Click(Sender: TObject);
 begin
 
 end;
 
-//DAR UPDATE NO ARQUIVO ESTUDANTES JSON
-procedure Tf_Main.UpdateEstudanteList();
-begin
-  jsonStr := TJson.ObjectToJsonString(estudantesList);
-  TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt',jsonStr);
-end;
-
-//DAR UPDATE NO ARQUIVO PROFESSORES JSON
-procedure Tf_Main.UpdateProfessoresList();
-begin
-  jsonStr := TJson.ObjectToJsonString(professoresList);
-  TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Professores.txt.txt',jsonStr);
-end;
 
 //EDITAR ALUNO
 procedure Tf_Main.btn_Editar_EClick(Sender: TObject);
@@ -375,7 +364,7 @@ begin
     lstB_e_Nome.DeleteSelected;
     lstB_e_ID.Items.Delete(selectedItem);
 
-    UpdateEstudanteList;
+    jManager.UpdateEstudanteList;
   end;
 end;
 
@@ -392,7 +381,7 @@ begin
     lstB_p_ID.Items.Delete(selectedItem);
     lstB_p_CPF.Items.Delete(selectedItem);
 
-    UpdateProfessoresList;
+    jManager.UpdateProfessoresList;
   end;
 end;
 

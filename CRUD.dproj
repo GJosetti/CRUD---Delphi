@@ -136,6 +136,7 @@
         <DCCReference Include="u_Matricula.pas"/>
         <DCCReference Include="u_ScreenManager.pas"/>
         <DCCReference Include="u_InputManager.pas"/>
+        <DCCReference Include="u_JsonManager.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

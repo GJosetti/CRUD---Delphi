@@ -1,7 +1,7 @@
 unit u_Professor;
 
 interface
-uses u_Pessoa;
+uses u_Pessoa, System.Generics.Collections;
 
 type TProfessor = class(TPessoa)
 
@@ -14,6 +14,7 @@ type TProfessor = class(TPessoa)
 
 end;
 
+var professoresList : TObjectList<TProfessor>;
 
 implementation
 
