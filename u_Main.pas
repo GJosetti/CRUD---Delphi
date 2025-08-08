@@ -14,7 +14,7 @@ type
     p_Main: TPanel;
     p_Estudante: TPanel;
     btn_Estudantes: TButton;
-    btn_Back: TButton;
+    btn_Back_E: TButton;
     lstB_e_Nome: TListBox;
     lstB_e_ID: TListBox;
     btn_Adicionar: TButton;
@@ -23,15 +23,27 @@ type
     lbl_edt_nome_E: TLabel;
     lbl_pnl_inputE: TLabel;
     btn_concluir_inputE: TButton;
-    btn_delete_E: TButton;
-    btn_Edit_E: TButton;
+    btn_Remover_E: TButton;
+    btn_Editar_E: TButton;
+    p_Professor: TPanel;
+    btn_Back_P: TButton;
+    ListBox1: TListBox;
+    ListBox2: TListBox;
+    btn_Adicionar_P: TButton;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Button3: TButton;
+    btn_Remover_P: TButton;
+    btn_Editar_P: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
-    procedure btn_BackClick(Sender: TObject);
+    procedure btn_Back_EClick(Sender: TObject);
     procedure btn_concluir_inputEClick(Sender: TObject);
     procedure btn_AdicionarClick(Sender: TObject);
-    procedure btn_delete_EClick(Sender: TObject);
-    procedure btn_Edit_EClick(Sender: TObject);
+    procedure btn_Remover_EClick(Sender: TObject);
+    procedure btn_Editar_EClick(Sender: TObject);
   private
     { Private declarations }
     procedure UpdateEstudanteList;
@@ -63,7 +75,7 @@ begin
 end;
 
 //VOLTAR PARA O MENU
-procedure Tf_Main.btn_BackClick(Sender: TObject);
+procedure Tf_Main.btn_Back_EClick(Sender: TObject);
 begin
 
   sToHide:= sManager.getActualScreen;
@@ -76,7 +88,7 @@ begin
 end;
 
 
-//CONCLUIR ADI플O OU EDI플O
+//CONCLUIR ADI플O OU EDI플O ESTUDANTES
 procedure Tf_Main.btn_concluir_inputEClick(Sender: TObject);
 var newEstudante : TEstudante;
 begin
@@ -171,7 +183,7 @@ begin
 end;
 
 //EDITAR ALUNO
-procedure Tf_Main.btn_Edit_EClick(Sender: TObject);
+procedure Tf_Main.btn_Editar_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
   selectedItem := lstB_e_Nome.ItemIndex;
@@ -215,7 +227,7 @@ end;
 
 
 //DELETAR ALUNO
-procedure Tf_Main.btn_delete_EClick(Sender: TObject);
+procedure Tf_Main.btn_Remover_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
   selectedItem := lstB_e_Nome.ItemIndex;
