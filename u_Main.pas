@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager;
 
 
 
@@ -40,6 +40,7 @@ type
     edt_CPF_P: TEdit;
     lbl_edt_CPF_P: TLabel;
     lstB_p_CPF: TListBox;
+    btn_Professores: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -48,13 +49,20 @@ type
     procedure btn_Remover_EClick(Sender: TObject);
     procedure btn_Editar_EClick(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
+    procedure btn_ProfessoresClick(Sender: TObject);
+    procedure btn_Adicionar_PClick(Sender: TObject);
+    procedure btn_concluir_inputPClick(Sender: TObject);
+    procedure btn_Editar_PClick(Sender: TObject);
+    procedure btn_Remover_PClick(Sender: TObject);
   private
     { Private declarations }
     procedure UpdateEstudanteList;
+    procedure UpdateProfessoresList;
   public
     { Public declarations }
     var sToHide : TScreenState;
     var estudantesList : TObjectList<TEstudante>;
+    var professoresList : TObjectList<TProfessor>;
     jsonStr: string;
   end;
 
@@ -79,6 +87,13 @@ begin
 end;
 
 //VOLTAR PARA O MENU
+procedure Tf_Main.btn_Adicionar_PClick(Sender: TObject);
+begin
+  pnl_inputP.Visible := true;
+  iManager.ActualState := etAdd;
+end;
+
+//VOLTAR PARA O MENU
 procedure Tf_Main.btn_Back_EClick(Sender: TObject);
 begin
 
@@ -88,6 +103,9 @@ begin
 
   lstB_e_Nome.Clear;
   lstB_e_ID.Clear;
+  lstB_p_Nome.Clear;
+  lstB_p_ID.Clear;
+  lstB_p_CPF.Clear;
 
 end;
 
@@ -99,9 +117,6 @@ begin
 
     if(iManager.ActualState = etAdd) then
     begin
-
-
-
       if estudantesList.Count > 0 then begin
         newEstudante := TEstudante.Create(estudantesList.Last.GetCodigo + 1);
         newEstudante.setNome(edt_nome_E.Text);
@@ -138,30 +153,93 @@ begin
     pnl_inputE.Visible := false;
     edt_nome_E.Text := '';
     UpdateEstudanteList();
-
+    iManager.ActualState := etBrowsing;
   
 end;
 
+
+//CONCLUIR ADIÇÃO OU EDIÇÃO DE PROFESSORES
+procedure Tf_Main.btn_concluir_inputPClick(Sender: TObject);
+var newProfessor : TProfessor;
+begin
+
+ if(iManager.ActualState = etAdd) then
+    begin
+      if professoresList.Count > 0 then begin
+        newProfessor := TProfessor.Create(professoresList.Last.GetCodigo + 1);
+        newProfessor.setNome(edt_nome_P.Text);
+        newProfessor.setCpf(edt_CPF_P.Text);
+
+        professoresList.Add(newProfessor);
+
+        lstB_p_Nome.Items.Add(newProfessor.getNome);
+        lstB_p_ID.Items.Add(newProfessor.GetCodigo.ToString);
+        lstB_p_CPF.Items.Add(newProfessor.getCpf);
+
+      end else begin
+        newProfessor := TProfessor.Create(professoresList.Count + 1);
+        newProfessor.setNome(edt_nome_P.Text);
+        newProfessor.setCpf(edt_CPF_P.Text);
+
+        professoresList.Add(newProfessor);
+
+        lstB_p_Nome.Items.Add(newProfessor.getNome);
+        lstB_p_ID.Items.Add(newProfessor.GetCodigo.ToString);
+        lstB_p_CPF.Items.Add(newProfessor.getCpf);
+      end;
+    end else if (iManager.ActualState = etEdit) then
+    begin
+
+      var selectedItem: Integer;
+      begin
+        selectedItem := lstB_p_Nome.ItemIndex;
+
+        professoresList[selectedItem].setNome(edt_nome_P.Text);
+        professoresList[selectedItem].setCPF(edt_CPF_P.Text);
+        lstB_p_Nome.Items[selectedItem] := edt_nome_P.Text;
+        lstB_p_CPF.Items[selectedItem] := edt_CPF_P.Text;
+      end;
+    end;
+
+
+    pnl_inputP.Visible := false;
+    edt_nome_P.Text := '';
+    edt_CPF_P.Text := '';
+    UpdateProfessoresList();
+    iManager.ActualState := etBrowsing;
+
+
+end;
 
 //FORM CREATE
 procedure Tf_Main.FormCreate(Sender: TObject);
 
 begin
-
-
   //Instanciando Listas
+
+  //Estudantes
   if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt')) then
   begin
-
     jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt');
     estudantesList := TJson.JsonToObject<TObjectList<TEstudante>>(jsonStr);
   end;
-
 
   if not (Assigned(estudantesList)) then
   begin
 
       estudantesList := TObjectList<TEstudante>.Create;
+  end;
+
+  //Professores
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Professores.txt.txt')) then
+  begin
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Professores.txt.txt');
+    professoresList := TJson.JsonToObject<TObjectList<TProfessor>>(jsonStr);
+  end;
+
+  if not (Assigned(professoresList)) then
+  begin
+      professoresList := TObjectList<TProfessor>.Create;
   end;
 
   //ScrenManager
@@ -170,13 +248,10 @@ begin
     sManager.ScreenMap := TDictionary<TScreenState, TPanel>.Create;
     sManager.ScreenMap.Add(etMain,p_Main);
     sManager.ScreenMap.Add(etEstudante,p_Estudante);
+    sManager.ScreenMap.Add(etProfessor, p_Professor);
 
   //InputManager
   iManager := TInputManager.Create;
-
-
-
-
 end;
 
 procedure Tf_Main.ListBox1Click(Sender: TObject);
@@ -189,6 +264,13 @@ procedure Tf_Main.UpdateEstudanteList();
 begin
   jsonStr := TJson.ObjectToJsonString(estudantesList);
   TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Estudantes.txt.txt',jsonStr);
+end;
+
+//DAR UPDATE NO ARQUIVO PROFESSORES JSON
+procedure Tf_Main.UpdateProfessoresList();
+begin
+  jsonStr := TJson.ObjectToJsonString(professoresList);
+  TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Professores.txt.txt',jsonStr);
 end;
 
 //EDITAR ALUNO
@@ -204,7 +286,28 @@ begin
   end;
 
 
+
+
   
+
+end;
+
+//EDITAR PROFESSOR
+procedure Tf_Main.btn_Editar_PClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+
+  selectedItem := lstB_p_Nome.ItemIndex;
+  iManager.ActualState := etEdit;
+  if(selectedItem <> -1)then
+  begin
+    pnl_inputP.Visible := true;
+    edt_nome_P.Text := professoresList[selectedItem].getNome;
+    edt_CPF_P.Text := professoresList[selectedItem].getCpf;
+  end;
+
+
+
 
 end;
 
@@ -234,6 +337,31 @@ begin
 end;
 
 
+//ENTRAR TELA PROFESSOR
+procedure Tf_Main.btn_ProfessoresClick(Sender: TObject);
+
+begin
+var i : Integer;
+  sToHide:= sManager.getActualScreen;
+  sManager.ChangeScreen(etProfessor,sToHide);
+  sManager.setActualScreen(etProfessor);
+
+
+
+  if(professoresList.Count > 0)  then
+  begin
+
+    for i := 0 to professoresList.Count - 1 do
+    begin
+      lstB_p_Nome.Items.Add(professoresList[i].getNome);
+      lstB_p_ID.Items.Add(professoresList[i].GetCodigo.ToString);
+      lstB_p_CPF.Items.Add(professoresList[i].getCpf);
+    end;
+  end;
+
+
+
+end;
 
 //DELETAR ALUNO
 procedure Tf_Main.btn_Remover_EClick(Sender: TObject);
@@ -252,11 +380,20 @@ begin
 end;
 
 
+procedure Tf_Main.btn_Remover_PClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+  selectedItem := lstB_p_Nome.ItemIndex;
+  if (selectedItem <> -1) then
+  begin
+    professoresList.Delete(selectedItem);
 
+    lstB_p_Nome.DeleteSelected;
+    lstB_p_ID.Items.Delete(selectedItem);
+    lstB_p_CPF.Items.Delete(selectedItem);
 
-
-
-
-
+    UpdateProfessoresList;
+  end;
+end;
 
 end.

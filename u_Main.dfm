@@ -162,6 +162,21 @@ object f_Main: Tf_Main
       TabOrder = 0
       OnClick = btn_EstudantesClick
     end
+    object btn_Professores: TButton
+      Left = 784
+      Top = 232
+      Width = 145
+      Height = 65
+      Caption = 'Professores'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btn_ProfessoresClick
+    end
   end
   object p_Professor: TPanel
     Left = 0
@@ -175,6 +190,74 @@ object f_Main: Tf_Main
     Visible = False
     ExplicitLeft = -56
     ExplicitTop = 160
+    object btn_Back_P: TButton
+      Left = 16
+      Top = 16
+      Width = 153
+      Height = 65
+      Caption = 'Voltar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btn_Back_EClick
+    end
+    object lstB_p_Nome: TListBox
+      Left = 326
+      Top = 208
+      Width = 197
+      Height = 249
+      ItemHeight = 15
+      TabOrder = 1
+    end
+    object lstB_p_ID: TListBox
+      Left = 289
+      Top = 208
+      Width = 39
+      Height = 249
+      Enabled = False
+      ExtendedSelect = False
+      ItemHeight = 15
+      TabOrder = 2
+    end
+    object btn_Adicionar_P: TButton
+      Left = 310
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Adicionar'
+      TabOrder = 3
+      OnClick = btn_Adicionar_PClick
+    end
+    object btn_Remover_P: TButton
+      Left = 440
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Remover'
+      TabOrder = 5
+      OnClick = btn_Remover_PClick
+    end
+    object btn_Editar_P: TButton
+      Left = 578
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Editar'
+      TabOrder = 6
+      OnClick = btn_Editar_PClick
+    end
+    object lstB_p_CPF: TListBox
+      Left = 511
+      Top = 208
+      Width = 201
+      Height = 249
+      ItemHeight = 15
+      TabOrder = 7
+    end
     object pnl_inputP: TPanel
       Left = 322
       Top = 192
@@ -240,7 +323,7 @@ object f_Main: Tf_Main
         Height = 25
         Caption = 'Concluir'
         TabOrder = 1
-        OnClick = btn_concluir_inputEClick
+        OnClick = btn_concluir_inputPClick
       end
       object edt_CPF_P: TEdit
         Left = 24
@@ -249,74 +332,6 @@ object f_Main: Tf_Main
         Height = 23
         TabOrder = 2
       end
-    end
-    object btn_Back_P: TButton
-      Left = 16
-      Top = 16
-      Width = 153
-      Height = 65
-      Caption = 'Voltar'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = btn_Back_EClick
-    end
-    object lstB_p_Nome: TListBox
-      Left = 322
-      Top = 208
-      Width = 201
-      Height = 249
-      ItemHeight = 15
-      TabOrder = 1
-    end
-    object lstB_p_ID: TListBox
-      Left = 289
-      Top = 208
-      Width = 39
-      Height = 249
-      Enabled = False
-      ExtendedSelect = False
-      ItemHeight = 15
-      TabOrder = 2
-    end
-    object btn_Adicionar_P: TButton
-      Left = 310
-      Top = 472
-      Width = 99
-      Height = 33
-      Caption = 'Adicionar'
-      TabOrder = 3
-      OnClick = btn_AdicionarClick
-    end
-    object btn_Remover_P: TButton
-      Left = 440
-      Top = 472
-      Width = 99
-      Height = 33
-      Caption = 'Remover'
-      TabOrder = 5
-      OnClick = btn_Remover_EClick
-    end
-    object btn_Editar_P: TButton
-      Left = 578
-      Top = 472
-      Width = 99
-      Height = 33
-      Caption = 'Editar'
-      TabOrder = 6
-      OnClick = btn_Editar_EClick
-    end
-    object lstB_p_CPF: TListBox
-      Left = 511
-      Top = 208
-      Width = 201
-      Height = 249
-      ItemHeight = 15
-      TabOrder = 7
     end
   end
 end
