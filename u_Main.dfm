@@ -12,31 +12,6 @@ object f_Main: Tf_Main
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object p_Main: TPanel
-    Left = 0
-    Top = 0
-    Width = 1035
-    Height = 734
-    Align = alClient
-    Color = 15189402
-    ParentBackground = False
-    TabOrder = 0
-    object btn_Estudantes: TButton
-      Left = 784
-      Top = 136
-      Width = 145
-      Height = 65
-      Caption = 'Estudantes'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = btn_EstudantesClick
-    end
-  end
   object p_Estudante: TPanel
     Left = 0
     Top = 0
@@ -99,9 +74,9 @@ object f_Main: Tf_Main
       object lbl_edt_nome_E: TLabel
         Left = 24
         Top = 67
-        Width = 93
+        Width = 132
         Height = 14
-        Caption = 'Digite seu nome:'
+        Caption = 'Digite o nome do aluno:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -109,7 +84,7 @@ object f_Main: Tf_Main
         Font.Style = []
         ParentFont = False
       end
-      object lbl_pnl_inputE: TLabel
+      object lbl_pnl_input_E: TLabel
         AlignWithMargins = True
         Left = 4
         Top = 16
@@ -163,6 +138,31 @@ object f_Main: Tf_Main
       OnClick = btn_Editar_EClick
     end
   end
+  object p_Main: TPanel
+    Left = 0
+    Top = 0
+    Width = 1035
+    Height = 734
+    Align = alClient
+    Color = 15189402
+    ParentBackground = False
+    TabOrder = 0
+    object btn_Estudantes: TButton
+      Left = 784
+      Top = 136
+      Width = 145
+      Height = 65
+      Caption = 'Estudantes'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btn_EstudantesClick
+    end
+  end
   object p_Professor: TPanel
     Left = 0
     Top = 0
@@ -173,6 +173,83 @@ object f_Main: Tf_Main
     ShowCaption = False
     TabOrder = 2
     Visible = False
+    ExplicitLeft = -56
+    ExplicitTop = 160
+    object pnl_inputP: TPanel
+      Left = 322
+      Top = 192
+      Width = 343
+      Height = 185
+      TabOrder = 4
+      Visible = False
+      object lbl_edt_nome_P: TLabel
+        Left = 24
+        Top = 67
+        Width = 153
+        Height = 14
+        Caption = 'Digite o nome do professor:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_pnl_input_P: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 16
+        Width = 335
+        Height = 16
+        Margins.Top = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Cadastro de Professor'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 0
+      end
+      object lbl_edt_CPF_P: TLabel
+        Left = 24
+        Top = 116
+        Width = 142
+        Height = 14
+        Caption = 'Digite o CPF do professor:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edt_nome_P: TEdit
+        Left = 24
+        Top = 87
+        Width = 121
+        Height = 23
+        TabOrder = 0
+      end
+      object btn_concluir_inputP: TButton
+        Left = 256
+        Top = 152
+        Width = 75
+        Height = 25
+        Caption = 'Concluir'
+        TabOrder = 1
+        OnClick = btn_concluir_inputEClick
+      end
+      object edt_CPF_P: TEdit
+        Left = 24
+        Top = 136
+        Width = 121
+        Height = 23
+        TabOrder = 2
+      end
+    end
     object btn_Back_P: TButton
       Left = 16
       Top = 16
@@ -188,17 +265,17 @@ object f_Main: Tf_Main
       TabOrder = 0
       OnClick = btn_Back_EClick
     end
-    object ListBox1: TListBox
-      Left = 408
-      Top = 192
+    object lstB_p_Nome: TListBox
+      Left = 322
+      Top = 208
       Width = 201
       Height = 249
       ItemHeight = 15
       TabOrder = 1
     end
-    object ListBox2: TListBox
-      Left = 370
-      Top = 192
+    object lstB_p_ID: TListBox
+      Left = 289
+      Top = 208
       Width = 39
       Height = 249
       Enabled = False
@@ -214,61 +291,6 @@ object f_Main: Tf_Main
       Caption = 'Adicionar'
       TabOrder = 3
       OnClick = btn_AdicionarClick
-    end
-    object Panel2: TPanel
-      Left = 322
-      Top = 192
-      Width = 343
-      Height = 185
-      TabOrder = 4
-      Visible = False
-      object Label1: TLabel
-        Left = 24
-        Top = 67
-        Width = 93
-        Height = 14
-        Caption = 'Digite seu nome:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label2: TLabel
-        AlignWithMargins = True
-        Left = 4
-        Top = 16
-        Width = 335
-        Height = 16
-        Margins.Top = 15
-        Align = alTop
-        Alignment = taCenter
-        Caption = 'Cadastro de Estudante'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ExplicitWidth = 149
-      end
-      object Edit1: TEdit
-        Left = 24
-        Top = 87
-        Width = 121
-        Height = 23
-        TabOrder = 0
-      end
-      object Button3: TButton
-        Left = 256
-        Top = 152
-        Width = 75
-        Height = 25
-        Caption = 'Concluir'
-        TabOrder = 1
-        OnClick = btn_concluir_inputEClick
-      end
     end
     object btn_Remover_P: TButton
       Left = 440
@@ -287,6 +309,14 @@ object f_Main: Tf_Main
       Caption = 'Editar'
       TabOrder = 6
       OnClick = btn_Editar_EClick
+    end
+    object lstB_p_CPF: TListBox
+      Left = 511
+      Top = 208
+      Width = 201
+      Height = 249
+      ItemHeight = 15
+      TabOrder = 7
     end
   end
 end

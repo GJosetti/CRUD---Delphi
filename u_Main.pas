@@ -21,22 +21,25 @@ type
     pnl_inputE: TPanel;
     edt_nome_E: TEdit;
     lbl_edt_nome_E: TLabel;
-    lbl_pnl_inputE: TLabel;
+    lbl_pnl_input_E: TLabel;
     btn_concluir_inputE: TButton;
     btn_Remover_E: TButton;
     btn_Editar_E: TButton;
     p_Professor: TPanel;
     btn_Back_P: TButton;
-    ListBox1: TListBox;
-    ListBox2: TListBox;
+    lstB_p_Nome: TListBox;
+    lstB_p_ID: TListBox;
     btn_Adicionar_P: TButton;
-    Panel2: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Edit1: TEdit;
-    Button3: TButton;
+    pnl_inputP: TPanel;
+    lbl_edt_nome_P: TLabel;
+    lbl_pnl_input_P: TLabel;
+    edt_nome_P: TEdit;
+    btn_concluir_inputP: TButton;
     btn_Remover_P: TButton;
     btn_Editar_P: TButton;
+    edt_CPF_P: TEdit;
+    lbl_edt_CPF_P: TLabel;
+    lstB_p_CPF: TListBox;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -44,6 +47,7 @@ type
     procedure btn_AdicionarClick(Sender: TObject);
     procedure btn_Remover_EClick(Sender: TObject);
     procedure btn_Editar_EClick(Sender: TObject);
+    procedure ListBox1Click(Sender: TObject);
   private
     { Private declarations }
     procedure UpdateEstudanteList;
@@ -172,6 +176,11 @@ begin
 
 
 
+
+end;
+
+procedure Tf_Main.ListBox1Click(Sender: TObject);
+begin
 
 end;
 
