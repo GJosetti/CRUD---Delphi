@@ -563,6 +563,7 @@ object f_Main: Tf_Main
       Top = 192
       Width = 115
       Height = 249
+      Enabled = False
       ItemHeight = 15
       TabOrder = 7
     end

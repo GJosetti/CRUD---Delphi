@@ -1,7 +1,7 @@
 unit u_Turma;
 
 interface
-uses u_ID, System.Generics.Collections;
+uses u_ID, System.Generics.Collections, u_Professor, u_Disciplina;
 
 type TTurma = class (TID)
 
@@ -16,6 +16,9 @@ type TTurma = class (TID)
 
   function GetIDDisciplina: Integer;
   procedure SetIDDisciplina(aID: Integer);
+
+  function getNomeProfessorByID() : string;
+  function getNomeDisciplinaByID: string;
 
 end;
 
@@ -34,6 +37,38 @@ function TTurma.GetIDProfessor: Integer;
 begin
   Result := Self.IDProfessor;
 end;
+
+function TTurma.getNomeProfessorByID(): string;
+var i: Integer;
+var j: Integer;
+begin
+
+  for i := 0 to professoresList.Count -1 do
+  begin
+    if(Self.IDProfessor = professoresList[i].GetCodigo) then
+    begin
+      Result := professoresList[i].getNome;
+    end;
+
+  end;
+end;
+
+function TTurma.getNomeDisciplinaByID(): string;
+var i: Integer;
+var j: Integer;
+begin
+
+  for i := 0 to professoresList.Count -1 do
+  begin
+    if(Self.IDProfessor = professoresList[i].GetCodigo) then
+    begin
+      Result := professoresList[i].getNome;
+    end;
+
+  end;
+end;
+
+
 
 procedure TTurma.SetIDDisciplina(aID: Integer);
 begin

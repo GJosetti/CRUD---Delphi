@@ -321,8 +321,12 @@ end;
 
 procedure Tf_Main.btn_concluir_inputTClick(Sender: TObject);
 var newTurma: TTurma;
+var selectedItem : Integer;
 var i,j : Integer;
+var tempNameProfessor,tempNameDisciplina : string;
 begin
+
+
 
  if(iManager.ActualState = etAdd) then
     begin
@@ -332,28 +336,30 @@ begin
 
        for i := 0 to professoresList.Count -1  do
          begin
-          if(cB_professor_T.SelText = professoresList[i].getNome) then
+          if(cB_professor_T.Text = professoresList[i].getNome) then
           begin
             newTurma.SetIDProfessor(professoresList[i].GetCodigo);
-            break;
+
+            //break;
           end;
          end;
 
        for j := 0 to disciplinasList.Count -1 do
          begin
-          if(cB_professor_T.SelText = disciplinasList[j].getNome) then
+          if(cB_professor_T.Text = disciplinasList[j].getNome) then
           begin
             newTurma.SetIDDisciplina(disciplinasList[i].GetCodigo);
-            break;
+            //break;
           end;
          end;
 
-
+        tempNameProfessor := newTurma.getNomeProfessorByID;
+        tempNameDisciplina := newTurma.getNomeDisciplinaByID;
 
         turmasList.Add(newTurma);
 
-        lstB_t_Professor.Items.Add(cB_professor_T.SelText);
-        lstb_t_Disciplina.Items.Add(cb_disciplina_T.SelText);
+        lstB_t_Professor.Items.Add(tempNameProfessor);
+        lstb_t_Disciplina.Items.Add(tempNameDisciplina);
         lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
 
       end else begin
@@ -384,16 +390,20 @@ begin
         lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
       end;
     end else if (iManager.ActualState = etEdit) then
+
     begin
+      selectedItem := lstB_t_Professor.ItemIndex;
 
 
-      end;
+      cB_professor_T.TextHint := turmasList[selectedItem].getNomeProfessorByID();
+
+
     end;
 
 
-    pnl_inputP.Visible := false;
-    edt_nome_P.Text := '';
-    edt_CPF_P.Text := '';
+    pnl_inputT.Visible := false;
+    cB_professor_T.Text := '';
+    cb_disciplina_T.Text := '';
     jManager.UpdateProfessoresList();
     iManager.ActualState := etBrowsing;
 
