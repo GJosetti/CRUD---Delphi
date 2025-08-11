@@ -474,4 +474,158 @@ object f_Main: Tf_Main
       OnClick = btn_Editar_DClick
     end
   end
+  object p_Turma: TPanel
+    Left = 0
+    Top = 0
+    Width = 1035
+    Height = 734
+    Align = alClient
+    Caption = 'p_Estudante'
+    ShowCaption = False
+    TabOrder = 4
+    Visible = False
+    object btn_Back_T: TButton
+      Left = 16
+      Top = 16
+      Width = 153
+      Height = 65
+      Caption = 'Voltar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btn_Back_EClick
+    end
+    object lstB_t_Professor: TListBox
+      Left = 400
+      Top = 192
+      Width = 115
+      Height = 249
+      ItemHeight = 15
+      TabOrder = 1
+    end
+    object lstB_t_ID: TListBox
+      Left = 362
+      Top = 192
+      Width = 39
+      Height = 249
+      Enabled = False
+      ExtendedSelect = False
+      ItemHeight = 15
+      TabOrder = 2
+    end
+    object btn_Adicionar_T: TButton
+      Left = 310
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Adicionar'
+      TabOrder = 3
+      OnClick = btn_Adicionar_DClick
+    end
+    object btn_Remover_T: TButton
+      Left = 440
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Remover'
+      TabOrder = 5
+      OnClick = btn_Remover_DClick
+    end
+    object btn_Editar_T: TButton
+      Left = 578
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Editar'
+      TabOrder = 6
+      OnClick = btn_Editar_DClick
+    end
+    object lstb_t_Disciplina: TListBox
+      Left = 511
+      Top = 192
+      Width = 115
+      Height = 249
+      ItemHeight = 15
+      TabOrder = 7
+    end
+    object pnl_inputT: TPanel
+      Left = 322
+      Top = 192
+      Width = 343
+      Height = 217
+      TabOrder = 4
+      Visible = False
+      object lbl_cB_professor_T: TLabel
+        Left = 24
+        Top = 67
+        Width = 153
+        Height = 14
+        Caption = 'Digite o nome do professor:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_pnl_input_T: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 16
+        Width = 335
+        Height = 16
+        Margins.Top = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Cadastro de Turma'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 123
+      end
+      object lbl_cB_disciplina_T: TLabel
+        Left = 24
+        Top = 145
+        Width = 148
+        Height = 14
+        Caption = 'Digite o nome da disciplina:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object btn_concluir_inputT: TButton
+        Left = 256
+        Top = 152
+        Width = 75
+        Height = 25
+        Caption = 'Concluir'
+        TabOrder = 0
+        OnClick = btn_concluir_inputDClick
+      end
+      object cB_professor_T: TComboBox
+        Left = 24
+        Top = 87
+        Width = 145
+        Height = 23
+        TabOrder = 1
+      end
+      object cb_disciplina_T: TComboBox
+        Left = 24
+        Top = 165
+        Width = 145
+        Height = 23
+        TabOrder = 2
+      end
+    end
+  end
 end
