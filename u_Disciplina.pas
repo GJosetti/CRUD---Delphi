@@ -1,7 +1,7 @@
 unit u_Disciplina;
 
 interface
-uses u_ID;
+uses u_ID, System.Generics.Collections;
 
 type TDisciplina = class(TID)
 
@@ -14,6 +14,8 @@ type TDisciplina = class(TID)
 
 
 end;
+
+var disciplinasList: TObjectList<TDisciplina>;
 
 implementation
 

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager, u_JsonManager;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager, u_JsonManager,u_Disciplina,u_Matricula,u_Turma;
 
 
 
@@ -41,6 +41,19 @@ type
     lbl_edt_CPF_P: TLabel;
     lstB_p_CPF: TListBox;
     btn_Professores: TButton;
+    p_Disciplina: TPanel;
+    btn_Back_D: TButton;
+    lstB_d_Nome: TListBox;
+    lstB_d_ID: TListBox;
+    btn_Adicionar_D: TButton;
+    pnl_inputD: TPanel;
+    lbl_edt_nome_D: TLabel;
+    lbl_pnl_input_D: TLabel;
+    edt_nome_D: TEdit;
+    btn_concluir_inputD: TButton;
+    btn_Remover_D: TButton;
+    btn_Editar_D: TButton;
+    btn_Disciplinas: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -54,6 +67,11 @@ type
     procedure btn_concluir_inputPClick(Sender: TObject);
     procedure btn_Editar_PClick(Sender: TObject);
     procedure btn_Remover_PClick(Sender: TObject);
+    procedure btn_DisciplinasClick(Sender: TObject);
+    procedure btn_Adicionar_DClick(Sender: TObject);
+    procedure btn_concluir_inputDClick(Sender: TObject);
+    procedure btn_Remover_DClick(Sender: TObject);
+    procedure btn_Editar_DClick(Sender: TObject);
   private
     { Private declarations }
     
@@ -86,6 +104,12 @@ begin
 end;
 
 //VOLTAR PARA O MENU
+procedure Tf_Main.btn_Adicionar_DClick(Sender: TObject);
+begin
+  pnl_inputD.Visible := true;
+  iManager.ActualState := etAdd;
+end;
+
 procedure Tf_Main.btn_Adicionar_PClick(Sender: TObject);
 begin
   pnl_inputP.Visible := true;
@@ -105,9 +129,59 @@ begin
   lstB_p_Nome.Clear;
   lstB_p_ID.Clear;
   lstB_p_CPF.Clear;
+  lstB_d_Nome.Clear;
+  lstB_d_ID.Clear;
 
 end;
 
+
+
+//CONCLUIR ADI플O OU EDI플O DISCIPLINAS
+procedure Tf_Main.btn_concluir_inputDClick(Sender: TObject);
+var newDisciplina : TDisciplina;
+begin
+
+    if(iManager.ActualState = etAdd) then
+    begin
+      if disciplinasList.Count > 0 then begin
+        newDisciplina := TDisciplina.Create(disciplinasList.Last.GetCodigo + 1);
+        newDisciplina.setNome(edt_nome_D.Text);
+
+        disciplinasList.Add(newDisciplina);
+
+        lstB_d_Nome.Items.Add(newDisciplina.getNome);
+        lstB_d_ID.Items.Add(newDisciplina.GetCodigo.ToString);
+
+      end else begin
+        newDisciplina := TDisciplina.Create(disciplinasList.Count + 1);
+        newDisciplina.setNome(edt_nome_D.Text);
+
+        disciplinasList.Add(newDisciplina);
+
+        lstB_d_Nome.Items.Add(newDisciplina.getNome);
+        lstB_d_ID.Items.Add(newDisciplina.GetCodigo.ToString);
+
+      end;
+    end else if (iManager.ActualState = etEdit) then
+    begin
+
+      var selectedItem: Integer;
+      begin
+        selectedItem := lstB_d_Nome.ItemIndex;
+
+        disciplinasList[selectedItem].setNome(edt_nome_D.Text);
+        lstB_d_Nome.Items[selectedItem] := edt_nome_D.Text;
+
+      end;
+    end;
+
+
+    pnl_inputD.Visible := false;
+    edt_nome_d.Text := '';
+    jManager.UpdateDisciplinasList();
+    iManager.ActualState := etBrowsing;
+
+end;
 
 //CONCLUIR ADI플O OU EDI플O ESTUDANTES
 procedure Tf_Main.btn_concluir_inputEClick(Sender: TObject);
@@ -153,8 +227,9 @@ begin
     edt_nome_E.Text := '';
     jManager.UpdateEstudanteList();
     iManager.ActualState := etBrowsing;
-  
+
 end;
+
 
 
 //CONCLUIR ADI플O OU EDI플O DE PROFESSORES
@@ -241,6 +316,19 @@ begin
       professoresList := TObjectList<TProfessor>.Create;
   end;
 
+
+  //Disciplinas
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Disciplinas.txt.txt')) then
+  begin
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Disciplinas.txt.txt');
+    disciplinasList := TJson.JsonToObject<TObjectList<TDisciplina>>(jsonStr);
+  end;
+
+  if not (Assigned(disciplinasList)) then
+  begin
+      disciplinasList := TObjectList<TDisciplina>.Create;
+  end;
+
   //ScrenManager
     sManager := TScreenManager.Create;
     sManager.setActualScreen(etMain);
@@ -248,6 +336,7 @@ begin
     sManager.ScreenMap.Add(etMain,p_Main);
     sManager.ScreenMap.Add(etEstudante,p_Estudante);
     sManager.ScreenMap.Add(etProfessor, p_Professor);
+    sManager.ScreenMap.Add(etDisciplina, p_Disciplina);
 
   //InputManager
   iManager := TInputManager.Create;
@@ -262,7 +351,21 @@ begin
 end;
 
 
-//EDITAR ALUNO
+//EDITAR DISCIPLINA
+procedure Tf_Main.btn_Editar_DClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+  selectedItem := lstB_d_Nome.ItemIndex;
+  iManager.ActualState := etEdit;
+  if(selectedItem <> -1)then
+  begin
+    pnl_inputD.Visible := true;
+    edt_nome_D.Text := DisciplinasList[selectedItem].getNome;
+  end;
+
+end;
+
+//EDITAR ESTUDANTE
 procedure Tf_Main.btn_Editar_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
@@ -273,12 +376,6 @@ begin
     pnl_inputE.Visible := true;
     edt_nome_E.Text := estudantesList[selectedItem].getNome;
   end;
-
-
-
-
-  
-
 end;
 
 //EDITAR PROFESSOR
@@ -349,7 +446,23 @@ var i : Integer;
   end;
 
 
+end;
 
+//DELETAR DISCIPLINA
+procedure Tf_Main.btn_Remover_DClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+  selectedItem := lstB_d_Nome.ItemIndex;
+  if (selectedItem <> -1) then
+  begin
+   disciplinasList.Delete(selectedItem);
+
+    lstB_d_Nome.DeleteSelected;
+    lstB_d_ID.Items.Delete(selectedItem);
+
+
+    jManager.UpdateDisciplinasList;
+  end;
 end;
 
 //DELETAR ALUNO
@@ -368,7 +481,7 @@ begin
   end;
 end;
 
-
+//DELETAR PROFESSOR
 procedure Tf_Main.btn_Remover_PClick(Sender: TObject);
 var selectedItem: Integer;
 begin
@@ -382,6 +495,26 @@ begin
     lstB_p_CPF.Items.Delete(selectedItem);
 
     jManager.UpdateProfessoresList;
+  end;
+end;
+
+//ENTRAR NA P핯INA DE DISCIPLINAS
+procedure Tf_Main.btn_DisciplinasClick(Sender: TObject);
+var i : Integer;
+begin
+  sToHide:= sManager.getActualScreen;
+  sManager.ChangeScreen(etDisciplina,sToHide);
+  sManager.setActualScreen(etDisciplina);
+
+  if(disciplinasList.Count > 0)  then
+  begin
+
+    for i := 0 to disciplinasList.Count - 1 do
+    begin
+      lstB_d_Nome.Items.Add(disciplinasList[i].getNome);
+      lstB_d_ID.Items.Add(disciplinasList[i].GetCodigo.ToString);
+    end;
+
   end;
 end;
 
