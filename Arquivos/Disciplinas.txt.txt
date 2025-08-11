@@ -1,1 +1,1 @@
-{"ownsObjects":true,"listHelper":[{"nome":"Artes","codigo":1},{"nome":"Matem\u00E1tica","codigo":2}]}
+{"ownsObjects":true,"listHelper":[{"nome":"Artes","codigo":1},{"nome":"Matem\u00E1tica","codigo":2},{"nome":"Portugu\u00EAs","codigo":3}]}

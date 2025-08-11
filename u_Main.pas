@@ -69,6 +69,7 @@ type
     cB_professor_T: TComboBox;
     lbl_cB_disciplina_T: TLabel;
     cb_disciplina_T: TComboBox;
+    btn_Turmas: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -87,6 +88,10 @@ type
     procedure btn_concluir_inputDClick(Sender: TObject);
     procedure btn_Remover_DClick(Sender: TObject);
     procedure btn_Editar_DClick(Sender: TObject);
+    procedure btn_Adicionar_TClick(Sender: TObject);
+    procedure btn_Editar_TClick(Sender: TObject);
+    procedure btn_TurmasClick(Sender: TObject);
+    procedure btn_concluir_inputTClick(Sender: TObject);
   private
     { Private declarations }
     
@@ -125,10 +130,22 @@ begin
   iManager.ActualState := etAdd;
 end;
 
+//ADICIONAR PROFESSOR
 procedure Tf_Main.btn_Adicionar_PClick(Sender: TObject);
 begin
   pnl_inputP.Visible := true;
   iManager.ActualState := etAdd;
+end;
+
+//ADICIONAR TURMA
+procedure Tf_Main.btn_Adicionar_TClick(Sender: TObject);
+var i : Integer;
+begin
+  pnl_inputT.Visible := true;
+  iManager.ActualState := etAdd;
+
+
+
 end;
 
 //VOLTAR PARA O MENU
@@ -146,6 +163,8 @@ begin
   lstB_p_CPF.Clear;
   lstB_d_Nome.Clear;
   lstB_d_ID.Clear;
+  cB_professor_T.Clear;
+  cb_disciplina_T.Clear;
 
 end;
 
@@ -300,7 +319,114 @@ begin
 
 end;
 
-//FORM CREATE
+procedure Tf_Main.btn_concluir_inputTClick(Sender: TObject);
+var newTurma: TTurma;
+var i,j : Integer;
+begin
+
+ if(iManager.ActualState = etAdd) then
+    begin
+      if turmasList.Count > 0 then begin
+        newTurma := TTurma.Create(turmasList.Last.GetCodigo + 1);
+
+
+       for i := 0 to professoresList.Count -1  do
+         begin
+          if(cB_professor_T.SelText = professoresList[i].getNome) then
+          begin
+            newTurma.SetIDProfessor(professoresList[i].GetCodigo);
+            break;
+          end;
+         end;
+
+       for j := 0 to disciplinasList.Count -1 do
+         begin
+          if(cB_professor_T.SelText = disciplinasList[j].getNome) then
+          begin
+            newTurma.SetIDDisciplina(disciplinasList[i].GetCodigo);
+            break;
+          end;
+         end;
+
+
+
+        turmasList.Add(newTurma);
+
+        lstB_t_Professor.Items.Add(cB_professor_T.SelText);
+        lstb_t_Disciplina.Items.Add(cb_disciplina_T.SelText);
+        lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
+
+      end else begin
+        newTurma := TTurma.Create(professoresList.Count + 1);
+
+         for i := 0 to professoresList.Count -1  do
+         begin
+          if(cB_professor_T.SelText = professoresList[i].getNome) then
+          begin
+            newTurma.SetIDProfessor(professoresList[i].GetCodigo);
+            break;
+          end;
+         end;
+
+       for j := 0 to disciplinasList.Count -1 do
+         begin
+          if(cB_professor_T.SelText = disciplinasList[j].getNome) then
+          begin
+            newTurma.SetIDDisciplina(disciplinasList[i].GetCodigo);
+            break;
+          end;
+         end;
+
+        turmasList.Add(newTurma);
+
+        lstB_t_Professor.Items.Add(cB_professor_T.SelText);
+        lstb_t_Disciplina.Items.Add(cb_disciplina_T.SelText);
+        lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
+      end;
+    end else if (iManager.ActualState = etEdit) then
+    begin
+
+
+      end;
+    end;
+
+
+    pnl_inputP.Visible := false;
+    edt_nome_P.Text := '';
+    edt_CPF_P.Text := '';
+    jManager.UpdateProfessoresList();
+    iManager.ActualState := etBrowsing;
+
+end;
+
+//CONCLUIR ADIÇÃO OU EDIÇÃO DE TURMAS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//FORM CREATE -------------------------------------------------------------
 procedure Tf_Main.FormCreate(Sender: TObject);
 
 begin
@@ -344,6 +470,18 @@ begin
       disciplinasList := TObjectList<TDisciplina>.Create;
   end;
 
+   //Turmas
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Turmas.txt.txt')) then
+  begin
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Turmas.txt.txt');
+    turmasList := TJson.JsonToObject<TObjectList<TTurma>>(jsonStr);
+  end;
+
+  if not (Assigned(turmasList)) then
+  begin
+      turmasList := TObjectList<TTurma>.Create;
+  end;
+
   //ScrenManager
     sManager := TScreenManager.Create;
     sManager.setActualScreen(etMain);
@@ -352,7 +490,7 @@ begin
     sManager.ScreenMap.Add(etEstudante,p_Estudante);
     sManager.ScreenMap.Add(etProfessor, p_Professor);
     sManager.ScreenMap.Add(etDisciplina, p_Disciplina);
-
+    sManager.ScreenMap.Add(etTurma, p_Turma);
   //InputManager
   iManager := TInputManager.Create;
 
@@ -410,6 +548,12 @@ begin
 
 
 
+end;
+
+//EDITAR TURMA
+procedure Tf_Main.btn_Editar_TClick(Sender: TObject);
+begin
+     //AA
 end;
 
 //ENTRAR NA PÁGINA DE ESTUDANTES
@@ -510,6 +654,59 @@ begin
     lstB_p_CPF.Items.Delete(selectedItem);
 
     jManager.UpdateProfessoresList;
+  end;
+end;
+
+//ENTRAR NA PAGINA DE TURMA
+procedure Tf_Main.btn_TurmasClick(Sender: TObject);
+var i : Integer;
+var j: Integer;
+var k: Integer;
+begin
+  sToHide:= sManager.getActualScreen;
+  sManager.ChangeScreen(etTurma,sToHide);
+  sManager.setActualScreen(etTurma);
+
+  //Atualizar dados nas ComboBox
+  for i := 0 to professoresList.Count - 1  do
+  begin
+    cB_professor_T.Items.Add(professoresList[i].getNome);
+  end;
+
+  for i := 0 to disciplinasList.Count - 1  do
+  begin
+    cB_disciplina_T.Items.Add(disciplinasList[i].getNome);
+  end;
+
+
+
+  //Preencher a tabela ao entrar na página
+  if(turmasList.Count > 0)  then
+  begin
+
+    for i := 0 to turmasList.Count - 1 do
+    begin
+
+       lstB_t_ID.Items.Add(turmasList[i].GetCodigo.ToString);
+
+      for j := 0 to professoresList.Count - 1  do
+      begin
+           if(turmasList[i].GetIDProfessor = professoresList[j].GetCodigo) then
+           begin
+              lstB_t_Professor.Items.Add(professoresList[j].getNome);
+           end;
+      end;
+      for k := 0 to disciplinasList.Count - 1  do
+      begin
+           if(turmasList[i].GetIDDisciplina = disciplinasList[k].GetCodigo) then
+           begin
+              lstb_t_Disciplina.Items.Add(disciplinasList[k].getNome);
+           end;
+      end;
+
+
+    end;
+
   end;
 end;
 

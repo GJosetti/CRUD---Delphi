@@ -293,61 +293,6 @@ object f_Main: Tf_Main
       end
     end
   end
-  object p_Main: TPanel
-    Left = 0
-    Top = 0
-    Width = 1035
-    Height = 734
-    Align = alClient
-    Color = 15189402
-    ParentBackground = False
-    TabOrder = 0
-    object btn_Estudantes: TButton
-      Left = 784
-      Top = 136
-      Width = 145
-      Height = 65
-      Caption = 'Estudantes'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = btn_EstudantesClick
-    end
-    object btn_Professores: TButton
-      Left = 784
-      Top = 232
-      Width = 145
-      Height = 65
-      Caption = 'Professores'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = btn_ProfessoresClick
-    end
-    object btn_Disciplinas: TButton
-      Left = 784
-      Top = 321
-      Width = 145
-      Height = 65
-      Caption = 'Disciplinas'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-      OnClick = btn_DisciplinasClick
-    end
-  end
   object p_Disciplina: TPanel
     Left = 0
     Top = 0
@@ -452,7 +397,6 @@ object f_Main: Tf_Main
         Height = 25
         Caption = 'Concluir'
         TabOrder = 1
-        OnClick = btn_concluir_inputDClick
       end
     end
     object btn_Remover_D: TButton
@@ -472,6 +416,76 @@ object f_Main: Tf_Main
       Caption = 'Editar'
       TabOrder = 6
       OnClick = btn_Editar_DClick
+    end
+  end
+  object p_Main: TPanel
+    Left = 0
+    Top = 0
+    Width = 1035
+    Height = 734
+    Align = alClient
+    Color = 15189402
+    ParentBackground = False
+    TabOrder = 0
+    object btn_Estudantes: TButton
+      Left = 784
+      Top = 136
+      Width = 145
+      Height = 65
+      Caption = 'Estudantes'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btn_EstudantesClick
+    end
+    object btn_Professores: TButton
+      Left = 784
+      Top = 232
+      Width = 145
+      Height = 65
+      Caption = 'Professores'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btn_ProfessoresClick
+    end
+    object btn_Disciplinas: TButton
+      Left = 784
+      Top = 321
+      Width = 145
+      Height = 65
+      Caption = 'Disciplinas'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btn_DisciplinasClick
+    end
+    object btn_Turmas: TButton
+      Left = 784
+      Top = 425
+      Width = 145
+      Height = 65
+      Caption = 'Turmas'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnClick = btn_TurmasClick
     end
   end
   object p_Turma: TPanel
@@ -524,7 +538,7 @@ object f_Main: Tf_Main
       Height = 33
       Caption = 'Adicionar'
       TabOrder = 3
-      OnClick = btn_Adicionar_DClick
+      OnClick = btn_Adicionar_TClick
     end
     object btn_Remover_T: TButton
       Left = 440
@@ -542,7 +556,7 @@ object f_Main: Tf_Main
       Height = 33
       Caption = 'Editar'
       TabOrder = 6
-      OnClick = btn_Editar_DClick
+      OnClick = btn_Editar_TClick
     end
     object lstb_t_Disciplina: TListBox
       Left = 511
@@ -610,7 +624,7 @@ object f_Main: Tf_Main
         Height = 25
         Caption = 'Concluir'
         TabOrder = 0
-        OnClick = btn_concluir_inputDClick
+        OnClick = btn_concluir_inputTClick
       end
       object cB_professor_T: TComboBox
         Left = 24

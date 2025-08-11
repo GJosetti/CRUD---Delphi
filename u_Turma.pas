@@ -1,7 +1,7 @@
 unit u_Turma;
 
 interface
-uses u_ID;
+uses u_ID, System.Generics.Collections;
 
 type TTurma = class (TID)
 
@@ -18,6 +18,8 @@ type TTurma = class (TID)
   procedure SetIDDisciplina(aID: Integer);
 
 end;
+
+var turmasList : TObjectList<TTurma>;
 
 implementation
 
