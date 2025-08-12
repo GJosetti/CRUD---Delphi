@@ -735,6 +735,8 @@ object f_Main: Tf_Main
     ShowCaption = False
     TabOrder = 5
     Visible = False
+    ExplicitLeft = 64
+    ExplicitTop = 87
     object lbl_Matriculas: TLabel
       Left = 1
       Top = 1

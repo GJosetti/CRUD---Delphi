@@ -190,14 +190,19 @@ begin
   lstB_d_ID.Clear;
   cB_professor_T.Clear;
   cb_disciplina_T.Clear;
+  cb_estudante_M.Clear;
+  cb_turma_M.Clear;
   lstB_t_Professor.Clear;
   lstB_t_ID.Clear;
   lstb_t_Disciplina.Clear;
+  lstB_m_ID.Clear;
+  lstB_m_Estudante.Clear;
+  lstB_m_Turma.Clear;
   pnl_inputE.Visible := false;
   pnl_inputP.Visible := false;
   pnl_inputD.Visible := false;
   pnl_inputT.Visible := false;
-
+  pnl_inputM.Visible := false;
 
 end;
 
@@ -392,30 +397,6 @@ end;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //FORM CREATE -------------------------------------------------------------
 procedure Tf_Main.FormCreate(Sender: TObject);
 
@@ -472,6 +453,18 @@ begin
       turmasList := TObjectList<TTurma>.Create;
   end;
 
+  //Matriculas
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Matrículas.txt.txt')) then
+  begin
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Matrículas.txt.txt');
+    matriculasList := TJson.JsonToObject<TObjectList<TMatricula>>(jsonStr);
+  end;
+
+  if not (Assigned(matriculasList)) then
+  begin
+      matriculasList := TObjectList<TMatricula>.Create;
+  end;
+
   //ScrenManager
     sManager := TScreenManager.Create;
     sManager.setActualScreen(etMain);
@@ -481,6 +474,7 @@ begin
     sManager.ScreenMap.Add(etProfessor, p_Professor);
     sManager.ScreenMap.Add(etDisciplina, p_Disciplina);
     sManager.ScreenMap.Add(etTurma, p_Turma);
+    sManager.ScreenMap.Add(etMatricula,p_Matricula);
   //InputManager
   iManager := TInputManager.Create;
 

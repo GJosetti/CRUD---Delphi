@@ -2,7 +2,7 @@ unit u_JsonManager;
 
 
 interface
-uses System.JSON, Rest.Json, System.IOUtils, System.Generics.Collections,u_Estudante, u_Professor, u_Disciplina, u_Turma;
+uses System.JSON, Rest.Json, System.IOUtils, System.Generics.Collections,u_Estudante, u_Professor, u_Disciplina, u_Turma, u_Matricula;
 
 var jsonStr: String;
 
@@ -14,7 +14,7 @@ procedure UpdateEstudanteList;
 procedure UpdateProfessoresList;
 procedure UpdateDisciplinasList;
 procedure UpdateTurmasList;
-
+procedure UpdateMatriculasList;
 end;
 
 
@@ -47,6 +47,13 @@ procedure TJManager.UpdateTurmasList();
 begin
   jsonStr := TJson.ObjectToJsonString(turmasList);
   TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Turmas.txt.txt',jsonStr);
+end;
+
+//DAR UPDATE NO ARQUIVO Matriculas JSON
+procedure TJManager.UpdateMatriculasList();
+begin
+  jsonStr := TJson.ObjectToJsonString(matriculasList);
+  TFile.WriteAllText('C:\Users\Guilherme Josetti\Desktop\CRUD\CRUD---Delphi\Arquivos\Matrículas.txt.txt',jsonStr);
 end;
 
 
