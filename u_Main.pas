@@ -74,6 +74,23 @@ type
     lbl_Estudante: TLabel;
     lbl_Professores: TLabel;
     lbl_Turmas: TLabel;
+    btn_Matriculas: TButton;
+    p_Matricula: TPanel;
+    lbl_Matriculas: TLabel;
+    btn_Back_M: TButton;
+    lstB_m_Estudante: TListBox;
+    lstB_m_ID: TListBox;
+    btn_Adicionar_M: TButton;
+    btn_Remover_M: TButton;
+    btn_Editar_M: TButton;
+    lstB_m_Turma: TListBox;
+    pnl_inputM: TPanel;
+    lbl_cb_estudante_M: TLabel;
+    lbl_pnl_input_M: TLabel;
+    lbl_cb_turma_M: TLabel;
+    btn_concluir_inputM: TButton;
+    cb_estudante_M: TComboBox;
+    cb_turma_M: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -144,7 +161,7 @@ end;
 
 //ADICIONAR TURMA
 procedure Tf_Main.btn_Adicionar_TClick(Sender: TObject);
-var i : Integer;
+
 begin
   pnl_inputT.Visible := true;
   iManager.ActualState := etAdd;

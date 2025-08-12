@@ -484,14 +484,14 @@ object f_Main: Tf_Main
       Height = 61
       Align = alTop
       Alignment = taCenter
-      Caption = 'Professores'
+      Caption = 'Turmas'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -48
       Font.Name = 'Franklin Gothic Medium'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 242
+      ExplicitWidth = 155
     end
     object btn_Back_T: TButton
       Left = 16
@@ -648,6 +648,7 @@ object f_Main: Tf_Main
     ParentBackground = False
     TabOrder = 0
     OnClick = p_MainClick
+    ExplicitLeft = -1
     object btn_Estudantes: TButton
       Left = 784
       Top = 136
@@ -707,6 +708,192 @@ object f_Main: Tf_Main
       ParentFont = False
       TabOrder = 3
       OnClick = btn_TurmasClick
+    end
+    object btn_Matriculas: TButton
+      Left = 784
+      Top = 513
+      Width = 145
+      Height = 65
+      Caption = 'Matr'#237'culas'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      OnClick = btn_TurmasClick
+    end
+  end
+  object p_Matricula: TPanel
+    Left = 0
+    Top = 0
+    Width = 1035
+    Height = 734
+    Align = alClient
+    Caption = 'p_Estudante'
+    ShowCaption = False
+    TabOrder = 5
+    Visible = False
+    object lbl_Matriculas: TLabel
+      Left = 1
+      Top = 1
+      Width = 1033
+      Height = 61
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'Matriculas'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -48
+      Font.Name = 'Franklin Gothic Medium'
+      Font.Style = []
+      ParentFont = False
+      ExplicitWidth = 215
+    end
+    object btn_Back_M: TButton
+      Left = 16
+      Top = 16
+      Width = 153
+      Height = 65
+      Caption = 'Voltar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btn_Back_EClick
+    end
+    object lstB_m_Estudante: TListBox
+      Left = 400
+      Top = 192
+      Width = 115
+      Height = 249
+      Enabled = False
+      ItemHeight = 15
+      TabOrder = 1
+    end
+    object lstB_m_ID: TListBox
+      Left = 362
+      Top = 192
+      Width = 39
+      Height = 249
+      ExtendedSelect = False
+      ItemHeight = 15
+      TabOrder = 2
+    end
+    object btn_Adicionar_M: TButton
+      Left = 310
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Adicionar'
+      TabOrder = 3
+      OnClick = btn_Adicionar_TClick
+    end
+    object btn_Remover_M: TButton
+      Left = 440
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Remover'
+      TabOrder = 5
+      OnClick = btn_Remover_TClick
+    end
+    object btn_Editar_M: TButton
+      Left = 578
+      Top = 472
+      Width = 99
+      Height = 33
+      Caption = 'Editar'
+      TabOrder = 6
+      OnClick = btn_Editar_TClick
+    end
+    object lstB_m_Turma: TListBox
+      Left = 511
+      Top = 192
+      Width = 115
+      Height = 249
+      Enabled = False
+      ItemHeight = 15
+      TabOrder = 7
+    end
+    object pnl_inputM: TPanel
+      Left = 322
+      Top = 192
+      Width = 343
+      Height = 217
+      TabOrder = 4
+      Visible = False
+      object lbl_cb_estudante_M: TLabel
+        Left = 24
+        Top = 67
+        Width = 159
+        Height = 14
+        Caption = 'Digite o nome do estudante:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_pnl_input_M: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 16
+        Width = 335
+        Height = 16
+        Margins.Top = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Cadastro de Matr'#237'cula'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 143
+      end
+      object lbl_cb_turma_M: TLabel
+        Left = 24
+        Top = 145
+        Width = 134
+        Height = 14
+        Caption = 'Digite o nome da turma:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object btn_concluir_inputM: TButton
+        Left = 256
+        Top = 152
+        Width = 75
+        Height = 25
+        Caption = 'Concluir'
+        TabOrder = 0
+        OnClick = btn_concluir_inputTClick
+      end
+      object cb_estudante_M: TComboBox
+        Left = 24
+        Top = 87
+        Width = 145
+        Height = 23
+        TabOrder = 1
+      end
+      object cb_turma_M: TComboBox
+        Left = 24
+        Top = 165
+        Width = 145
+        Height = 23
+        TabOrder = 2
+      end
     end
   end
 end
