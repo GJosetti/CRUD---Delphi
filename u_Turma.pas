@@ -19,6 +19,8 @@ type TTurma = class (TID)
 
   function getNomeProfessorByID() : string;
   function getNomeDisciplinaByID: string;
+  procedure setIDProfessorByNome(aNome: string);
+  procedure setIDDisciplinaByNome(aNome: string);
 
 end;
 
@@ -31,6 +33,21 @@ implementation
 function TTurma.GetIDDisciplina: Integer;
 begin
   Result := Self.IDDisciplina;
+end;
+
+
+
+procedure TTurma.setIDDisciplinaByNome(aNome: string);
+var i : Integer;
+begin
+  for i := 0 to disciplinasList.Count -1  do
+  begin
+    if(aNome = disciplinasList[i].getNome) then
+    begin
+      Self.SetIDDisciplina(disciplinasList[i].GetCodigo);
+      break;
+    end;
+  end;
 end;
 
 function TTurma.GetIDProfessor: Integer;
@@ -50,6 +67,19 @@ begin
       Result := professoresList[i].getNome;
     end;
 
+  end;
+end;
+
+procedure TTurma.setIDProfessorByNome(aNome: string);
+var i : Integer;
+begin
+  for i := 0 to professoresList.Count -1  do
+  begin
+    if(aNome = professoresList[i].getNome) then
+    begin
+      Self.SetIDProfessor(professoresList[i].GetCodigo);
+      break;
+    end;
   end;
 end;
 

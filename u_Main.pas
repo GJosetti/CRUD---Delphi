@@ -92,6 +92,7 @@ type
     procedure btn_Editar_TClick(Sender: TObject);
     procedure btn_TurmasClick(Sender: TObject);
     procedure btn_concluir_inputTClick(Sender: TObject);
+    procedure btn_Remover_TClick(Sender: TObject);
   private
     { Private declarations }
     
@@ -143,7 +144,8 @@ var i : Integer;
 begin
   pnl_inputT.Visible := true;
   iManager.ActualState := etAdd;
-
+  cB_professor_T.TextHint := '';
+  cb_disciplina_T.TextHint := '';
 
 
 end;
@@ -155,6 +157,8 @@ begin
   sToHide:= sManager.getActualScreen;
   sManager.ChangeScreen(etMain,sToHide);
   sManager.setActualScreen(etMain);
+
+  iManager.ActualState := etBrowsing;
 
   lstB_e_Nome.Clear;
   lstB_e_ID.Clear;
@@ -168,6 +172,11 @@ begin
   lstB_t_Professor.Clear;
   lstB_t_ID.Clear;
   lstb_t_Disciplina.Clear;
+  pnl_inputE.Visible := false;
+  pnl_inputP.Visible := false;
+  pnl_inputD.Visible := false;
+  pnl_inputT.Visible := false;
+
 
 end;
 
@@ -177,34 +186,28 @@ end;
 procedure Tf_Main.btn_concluir_inputDClick(Sender: TObject);
 var newDisciplina : TDisciplina;
 begin
-
+    //Verificação se é o primeiro
     if(iManager.ActualState = etAdd) then
     begin
       if disciplinasList.Count > 0 then begin
         newDisciplina := TDisciplina.Create(disciplinasList.Last.GetCodigo + 1);
-        newDisciplina.setNome(edt_nome_D.Text);
-
-        disciplinasList.Add(newDisciplina);
-
-        lstB_d_Nome.Items.Add(newDisciplina.getNome);
-        lstB_d_ID.Items.Add(newDisciplina.GetCodigo.ToString);
-
       end else begin
         newDisciplina := TDisciplina.Create(disciplinasList.Count + 1);
-        newDisciplina.setNome(edt_nome_D.Text);
-
-        disciplinasList.Add(newDisciplina);
-
-        lstB_d_Nome.Items.Add(newDisciplina.getNome);
-        lstB_d_ID.Items.Add(newDisciplina.GetCodigo.ToString);
-
       end;
+
+      newDisciplina.setNome(edt_nome_D.Text);
+
+      disciplinasList.Add(newDisciplina);
+
+      lstB_d_Nome.Items.Add(newDisciplina.getNome);
+      lstB_d_ID.Items.Add(newDisciplina.GetCodigo.ToString);
+
     end else if (iManager.ActualState = etEdit) then
     begin
 
       var selectedItem: Integer;
       begin
-        selectedItem := lstB_d_Nome.ItemIndex;
+        selectedItem := lstB_d_ID.ItemIndex;
 
         disciplinasList[selectedItem].setNome(edt_nome_D.Text);
         lstB_d_Nome.Items[selectedItem] := edt_nome_D.Text;
@@ -227,31 +230,26 @@ begin
 
     if(iManager.ActualState = etAdd) then
     begin
+      //Verificação se é o primeiro
       if estudantesList.Count > 0 then begin
         newEstudante := TEstudante.Create(estudantesList.Last.GetCodigo + 1);
-        newEstudante.setNome(edt_nome_E.Text);
-
-        estudantesList.Add(newEstudante);
-
-        lstB_e_Nome.Items.Add(newEstudante.getNome);
-        lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
-
       end else begin
         newEstudante := TEstudante.Create(estudantesList.Count + 1);
-        newEstudante.setNome(edt_nome_E.Text);
-
-        estudantesList.Add(newEstudante);
-
-        lstB_e_Nome.Items.Add(newEstudante.getNome);
-        lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
-
       end;
+
+      newEstudante.setNome(edt_nome_E.Text);
+
+      estudantesList.Add(newEstudante);
+
+      lstB_e_Nome.Items.Add(newEstudante.getNome);
+      lstB_e_ID.Items.Add(newEstudante.GetCodigo.ToString);
+
     end else if (iManager.ActualState = etEdit) then
     begin
 
       var selectedItem: Integer;
       begin
-        selectedItem := lstB_e_Nome.ItemIndex;
+        selectedItem := lstB_e_ID.ItemIndex;
 
         estudantesList[selectedItem].setNome(edt_nome_E.Text);
         lstB_e_Nome.Items[selectedItem] := edt_nome_E.Text;
@@ -276,34 +274,28 @@ begin
 
  if(iManager.ActualState = etAdd) then
     begin
+      //Verificação se é o primeiro
       if professoresList.Count > 0 then begin
         newProfessor := TProfessor.Create(professoresList.Last.GetCodigo + 1);
-        newProfessor.setNome(edt_nome_P.Text);
-        newProfessor.setCpf(edt_CPF_P.Text);
-
-        professoresList.Add(newProfessor);
-
-        lstB_p_Nome.Items.Add(newProfessor.getNome);
-        lstB_p_ID.Items.Add(newProfessor.GetCodigo.ToString);
-        lstB_p_CPF.Items.Add(newProfessor.getCpf);
-
       end else begin
         newProfessor := TProfessor.Create(professoresList.Count + 1);
-        newProfessor.setNome(edt_nome_P.Text);
-        newProfessor.setCpf(edt_CPF_P.Text);
-
-        professoresList.Add(newProfessor);
-
-        lstB_p_Nome.Items.Add(newProfessor.getNome);
-        lstB_p_ID.Items.Add(newProfessor.GetCodigo.ToString);
-        lstB_p_CPF.Items.Add(newProfessor.getCpf);
       end;
+
+      newProfessor.setNome(edt_nome_P.Text);
+      newProfessor.setCpf(edt_CPF_P.Text);
+
+      professoresList.Add(newProfessor);
+
+      lstB_p_Nome.Items.Add(newProfessor.getNome);
+      lstB_p_ID.Items.Add(newProfessor.GetCodigo.ToString);
+      lstB_p_CPF.Items.Add(newProfessor.getCpf);
+
     end else if (iManager.ActualState = etEdit) then
     begin
 
       var selectedItem: Integer;
       begin
-        selectedItem := lstB_p_Nome.ItemIndex;
+        selectedItem := lstB_p_ID.ItemIndex;
 
         professoresList[selectedItem].setNome(edt_nome_P.Text);
         professoresList[selectedItem].setCPF(edt_CPF_P.Text);
@@ -326,7 +318,6 @@ end;
 procedure Tf_Main.btn_concluir_inputTClick(Sender: TObject);
 var newTurma: TTurma;
 var selectedItem : Integer;
-var i,j,k,l : Integer;
 var tempNameProfessor,tempNameDisciplina : string;
 begin
 
@@ -342,42 +333,29 @@ begin
         newTurma := TTurma.Create(turmasList.Count + 1);
       end;
 
-      for i := 0 to professoresList.Count -1  do
-      begin
-        if(cB_professor_T.Text = professoresList[i].getNome) then
-          begin
-            newTurma.SetIDProfessor(professoresList[i].GetCodigo);
+     newTurma.setIDProfessorByNome(cB_professor_T.Text);
+     newTurma.setIDDisciplinaByNome(cb_disciplina_T.Text);
 
-            //break;
-          end;
-         end;
 
-      for j := 0 to disciplinasList.Count -1 do
-      begin
-        if(cb_disciplina_T.Text = disciplinasList[j].getNome) then
-        begin
-          newTurma.SetIDDisciplina(disciplinasList[j].GetCodigo);
-          //break;
-        end;
-      end;
+     tempNameProfessor := newTurma.getNomeProfessorByID;
+     tempNameDisciplina := newTurma.getNomeDisciplinaByID;
 
-        tempNameProfessor := newTurma.getNomeProfessorByID;
-        tempNameDisciplina := newTurma.getNomeDisciplinaByID;
+     turmasList.Add(newTurma);
 
-        turmasList.Add(newTurma);
-
-        lstB_t_Professor.Items.Add(tempNameProfessor);
-        lstb_t_Disciplina.Items.Add(tempNameDisciplina);
-        lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
+     lstB_t_Professor.Items.Add(tempNameProfessor);
+     lstb_t_Disciplina.Items.Add(tempNameDisciplina);
+     lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
 
 
     end else if (iManager.ActualState = etEdit) then
     begin
-      selectedItem := lstB_t_Professor.ItemIndex;
 
+          selectedItem := lstB_t_ID.ItemIndex;
 
-      cB_professor_T.TextHint := turmasList[selectedItem].getNomeProfessorByID();
-
+          turmasList[selectedItem].setIDProfessorByNome(cB_professor_T.Text);
+          turmasList[selectedItem].setIDDisciplinaByNome(cb_disciplina_T.Text);
+          lstB_t_Professor.Items[selectedItem] :=turmasList[selectedItem].getNomeProfessorByID;
+          lstb_t_Disciplina.Items[selectedItem] := turmasList[selectedItem].getNomeDisciplinaByID;
 
     end;
 
@@ -499,7 +477,7 @@ end;
 procedure Tf_Main.btn_Editar_DClick(Sender: TObject);
 var selectedItem: Integer;
 begin
-  selectedItem := lstB_d_Nome.ItemIndex;
+  selectedItem := lstB_d_ID.ItemIndex;
   iManager.ActualState := etEdit;
   if(selectedItem <> -1)then
   begin
@@ -513,7 +491,7 @@ end;
 procedure Tf_Main.btn_Editar_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
-  selectedItem := lstB_e_Nome.ItemIndex;
+  selectedItem := lstB_e_ID.ItemIndex;
   iManager.ActualState := etEdit;
   if(selectedItem <> -1)then
   begin
@@ -527,7 +505,7 @@ procedure Tf_Main.btn_Editar_PClick(Sender: TObject);
 var selectedItem: Integer;
 begin
 
-  selectedItem := lstB_p_Nome.ItemIndex;
+  selectedItem := lstB_p_ID.ItemIndex;
   iManager.ActualState := etEdit;
   if(selectedItem <> -1)then
   begin
@@ -543,8 +521,14 @@ end;
 
 //EDITAR TURMA
 procedure Tf_Main.btn_Editar_TClick(Sender: TObject);
+var selectedItem: Integer;
 begin
-     //AA
+  iManager.ActualState := etEdit;
+  pnl_inputT.Visible := true;
+
+  selectedItem := lstB_t_ID.ItemIndex;
+  cB_professor_T.TextHint := turmasList[selectedItem].getNomeProfessorByID();
+  cb_disciplina_T.TextHint := turmasList[selectedItem].getNomeDisciplinaByID;
 end;
 
 //ENTRAR NA PÁGINA DE ESTUDANTES
@@ -602,13 +586,13 @@ end;
 procedure Tf_Main.btn_Remover_DClick(Sender: TObject);
 var selectedItem: Integer;
 begin
-  selectedItem := lstB_d_Nome.ItemIndex;
+  selectedItem := lstB_d_ID.ItemIndex;
   if (selectedItem <> -1) then
   begin
    disciplinasList.Delete(selectedItem);
 
-    lstB_d_Nome.DeleteSelected;
-    lstB_d_ID.Items.Delete(selectedItem);
+    lstB_d_ID.DeleteSelected;
+    lstB_d_Nome.Items.Delete(selectedItem);
 
 
     jManager.UpdateDisciplinasList;
@@ -619,13 +603,13 @@ end;
 procedure Tf_Main.btn_Remover_EClick(Sender: TObject);
 var selectedItem: Integer;
 begin
-  selectedItem := lstB_e_Nome.ItemIndex;
+  selectedItem := lstB_e_ID.ItemIndex;
   if (selectedItem <> -1) then
   begin
     estudantesList.Delete(selectedItem);
 
-    lstB_e_Nome.DeleteSelected;
-    lstB_e_ID.Items.Delete(selectedItem);
+    lstB_e_ID.DeleteSelected;
+    lstB_e_Nome.Items.Delete(selectedItem);
 
     jManager.UpdateEstudanteList;
   end;
@@ -635,16 +619,33 @@ end;
 procedure Tf_Main.btn_Remover_PClick(Sender: TObject);
 var selectedItem: Integer;
 begin
-  selectedItem := lstB_p_Nome.ItemIndex;
+  selectedItem := lstB_p_ID.ItemIndex;
   if (selectedItem <> -1) then
   begin
     professoresList.Delete(selectedItem);
 
-    lstB_p_Nome.DeleteSelected;
-    lstB_p_ID.Items.Delete(selectedItem);
+    lstB_p_ID.DeleteSelected;
+    lstB_p_Nome.Items.Delete(selectedItem);
     lstB_p_CPF.Items.Delete(selectedItem);
 
     jManager.UpdateProfessoresList;
+  end;
+end;
+
+//REMOVER TURMA
+procedure Tf_Main.btn_Remover_TClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+  selectedItem := lstB_t_ID.ItemIndex;
+  if (selectedItem <> -1) then
+  begin
+    turmasList.Delete(selectedItem);
+
+    lstB_t_ID.DeleteSelected;
+    lstB_t_Professor.Items.Delete(selectedItem);
+    lstb_t_Disciplina.Items.Delete(selectedItem);
+
+    jManager.UpdateTurmasList;
   end;
 end;
 

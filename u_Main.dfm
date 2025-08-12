@@ -42,6 +42,7 @@ object f_Main: Tf_Main
       Top = 192
       Width = 201
       Height = 249
+      Enabled = False
       ItemHeight = 15
       TabOrder = 1
     end
@@ -50,7 +51,6 @@ object f_Main: Tf_Main
       Top = 192
       Width = 39
       Height = 249
-      Enabled = False
       ExtendedSelect = False
       ItemHeight = 15
       TabOrder = 2
@@ -168,6 +168,7 @@ object f_Main: Tf_Main
       Top = 208
       Width = 197
       Height = 249
+      Enabled = False
       ItemHeight = 15
       TabOrder = 1
     end
@@ -176,7 +177,6 @@ object f_Main: Tf_Main
       Top = 208
       Width = 39
       Height = 249
-      Enabled = False
       ExtendedSelect = False
       ItemHeight = 15
       TabOrder = 2
@@ -323,6 +323,7 @@ object f_Main: Tf_Main
       Top = 192
       Width = 201
       Height = 249
+      Enabled = False
       ItemHeight = 15
       TabOrder = 1
     end
@@ -331,7 +332,6 @@ object f_Main: Tf_Main
       Top = 192
       Width = 39
       Height = 249
-      Enabled = False
       ExtendedSelect = False
       ItemHeight = 15
       TabOrder = 2
@@ -397,6 +397,7 @@ object f_Main: Tf_Main
         Height = 25
         Caption = 'Concluir'
         TabOrder = 1
+        OnClick = btn_concluir_inputDClick
       end
     end
     object btn_Remover_D: TButton
@@ -518,6 +519,7 @@ object f_Main: Tf_Main
       Top = 192
       Width = 115
       Height = 249
+      Enabled = False
       ItemHeight = 15
       TabOrder = 1
     end
@@ -526,7 +528,6 @@ object f_Main: Tf_Main
       Top = 192
       Width = 39
       Height = 249
-      Enabled = False
       ExtendedSelect = False
       ItemHeight = 15
       TabOrder = 2
@@ -547,7 +548,7 @@ object f_Main: Tf_Main
       Height = 33
       Caption = 'Remover'
       TabOrder = 5
-      OnClick = btn_Remover_DClick
+      OnClick = btn_Remover_TClick
     end
     object btn_Editar_T: TButton
       Left = 578
