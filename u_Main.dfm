@@ -722,7 +722,7 @@ object f_Main: Tf_Main
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
-      OnClick = btn_TurmasClick
+      OnClick = btn_MatriculasClick
     end
   end
   object p_Matricula: TPanel
@@ -793,7 +793,7 @@ object f_Main: Tf_Main
       Height = 33
       Caption = 'Adicionar'
       TabOrder = 3
-      OnClick = btn_Adicionar_TClick
+      OnClick = btn_Adicionar_MClick
     end
     object btn_Remover_M: TButton
       Left = 440
@@ -802,7 +802,7 @@ object f_Main: Tf_Main
       Height = 33
       Caption = 'Remover'
       TabOrder = 5
-      OnClick = btn_Remover_TClick
+      OnClick = btn_Remover_MClick
     end
     object btn_Editar_M: TButton
       Left = 578
@@ -811,7 +811,7 @@ object f_Main: Tf_Main
       Height = 33
       Caption = 'Editar'
       TabOrder = 6
-      OnClick = btn_Editar_TClick
+      OnClick = btn_Editar_MClick
     end
     object lstB_m_Turma: TListBox
       Left = 511
@@ -892,7 +892,7 @@ object f_Main: Tf_Main
       object cb_turma_M: TComboBox
         Left = 24
         Top = 165
-        Width = 145
+        Width = 209
         Height = 23
         TabOrder = 2
       end

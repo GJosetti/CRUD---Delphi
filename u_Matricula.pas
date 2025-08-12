@@ -63,7 +63,7 @@ begin
   begin
     if(Self.IDEstudante = turmasList[i].GetCodigo) then
     begin
-      Result := turmasList[i].GetCodigo.ToString + ' - ' + 'Professor(a) ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID;
+      Result := turmasList[i].GetCodigo.ToString + ' - ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID;
     end;
   end;
 

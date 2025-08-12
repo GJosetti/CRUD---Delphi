@@ -85,7 +85,6 @@ end;
 
 function TTurma.getNomeDisciplinaByID(): string;
 var i: Integer;
-var j: Integer;
 begin
 
   for i := 0 to disciplinasList.Count -1 do

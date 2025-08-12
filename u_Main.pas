@@ -114,6 +114,10 @@ type
     procedure btn_concluir_inputTClick(Sender: TObject);
     procedure btn_Remover_TClick(Sender: TObject);
     procedure p_MainClick(Sender: TObject);
+    procedure btn_Adicionar_MClick(Sender: TObject);
+    procedure btn_Remover_MClick(Sender: TObject);
+    procedure btn_Editar_MClick(Sender: TObject);
+    procedure btn_MatriculasClick(Sender: TObject);
   private
     { Private declarations }
     
@@ -150,6 +154,15 @@ procedure Tf_Main.btn_Adicionar_DClick(Sender: TObject);
 begin
   pnl_inputD.Visible := true;
   iManager.ActualState := etAdd;
+end;
+
+procedure Tf_Main.btn_Adicionar_MClick(Sender: TObject);
+begin
+  pnl_inputM.Visible := true;
+  iManager.ActualState := etAdd;
+  cb_estudante_M.TextHint := '';
+  cb_turma_M.TextHint := '';
+
 end;
 
 //ADICIONAR PROFESSOR
@@ -514,6 +527,17 @@ begin
   end;
 end;
 
+procedure Tf_Main.btn_Editar_MClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+  iManager.ActualState := etEdit;
+  pnl_inputM.Visible := true;
+
+  selectedItem := lstB_m_ID.ItemIndex;
+  cB_estudante_M.TextHint := matriculasList[selectedItem].getNomeEstudanteByID();
+  cb_turma_M.TextHint := matriculasList[selectedItem].GetCodigo.ToString + ' - ' + turmasList[selectedItem].getNomeProfessorByID + ' -> ' + turmasList[selectedItem].getNomeDisciplinaByID;;
+end;
+
 //EDITAR PROFESSOR
 procedure Tf_Main.btn_Editar_PClick(Sender: TObject);
 var selectedItem: Integer;
@@ -570,6 +594,58 @@ begin
 
 end;
 
+
+procedure Tf_Main.btn_MatriculasClick(Sender: TObject);
+var i : Integer;
+var j: Integer;
+var k: Integer;
+begin
+  sToHide:= sManager.getActualScreen;
+  sManager.ChangeScreen(etMatricula,sToHide);
+  sManager.setActualScreen(etMatricula);
+
+  //Atualizar dados nas ComboBox
+  for i := 0 to estudantesList.Count - 1  do
+  begin
+    cb_estudante_M.Items.Add(estudantesList[i].getNome);
+  end;
+
+  for i := 0 to turmasList.Count - 1  do
+  begin
+    cB_turma_M.Items.Add(turmasList[i].GetCodigo.ToString + ' - ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID);
+  end;
+
+
+
+  //Preencher a tabela ao entrar na página
+  if(matriculasList.Count > 0)  then
+  begin
+
+    for i := 0 to matriculasList.Count - 1 do
+    begin
+
+       lstB_M_ID.Items.Add(matriculasList[i].GetCodigo.ToString);
+
+      for j := 0 to professoresList.Count - 1  do
+      begin
+           if(matriculasList[i].getIDEstudante = estudantesList[j].GetCodigo) then
+           begin
+              lstB_m_Estudante.Items.Add(estudantesList[j].getNome);
+           end;
+      end;
+      for k := 0 to turmasList.Count - 1  do
+      begin
+           if(matriculasList[i].getIDTurma = turmasList[k].GetCodigo) then
+           begin
+              lstb_m_Turma.Items.Add(turmasList[k].GetCodigo.ToString + ' - ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID);
+           end;
+      end;
+
+
+    end;
+
+  end;
+end;
 
 //ENTRAR TELA PROFESSOR
 procedure Tf_Main.btn_ProfessoresClick(Sender: TObject);
@@ -629,6 +705,22 @@ begin
   end;
 end;
 
+//REMOVER MATRICULAS
+procedure Tf_Main.btn_Remover_MClick(Sender: TObject);
+var selectedItem: Integer;
+begin
+  selectedItem := lstB_m_ID.ItemIndex;
+  if (selectedItem <> -1) then
+  begin
+    matriculasList.Delete(selectedItem);
+
+    lstB_m_ID.DeleteSelected;
+    lstB_m_Estudante.Items.Delete(selectedItem);
+    lstb_m_Turma.Items.Delete(selectedItem);
+
+    jManager.UpdateMatriculasList;
+  end;
+end;
 //DELETAR PROFESSOR
 procedure Tf_Main.btn_Remover_PClick(Sender: TObject);
 var selectedItem: Integer;
