@@ -165,6 +165,9 @@ begin
   lstB_d_ID.Clear;
   cB_professor_T.Clear;
   cb_disciplina_T.Clear;
+  lstB_t_Professor.Clear;
+  lstB_t_ID.Clear;
+  lstb_t_Disciplina.Clear;
 
 end;
 
@@ -319,10 +322,11 @@ begin
 
 end;
 
+//CONCLUIR ADIÇÃO OU EDIÇÃO DE TURMAS
 procedure Tf_Main.btn_concluir_inputTClick(Sender: TObject);
 var newTurma: TTurma;
 var selectedItem : Integer;
-var i,j : Integer;
+var i,j,k,l : Integer;
 var tempNameProfessor,tempNameDisciplina : string;
 begin
 
@@ -330,13 +334,17 @@ begin
 
  if(iManager.ActualState = etAdd) then
     begin
+      //Verificação se é o primeiro
       if turmasList.Count > 0 then begin
         newTurma := TTurma.Create(turmasList.Last.GetCodigo + 1);
 
+      end else begin
+        newTurma := TTurma.Create(turmasList.Count + 1);
+      end;
 
-       for i := 0 to professoresList.Count -1  do
-         begin
-          if(cB_professor_T.Text = professoresList[i].getNome) then
+      for i := 0 to professoresList.Count -1  do
+      begin
+        if(cB_professor_T.Text = professoresList[i].getNome) then
           begin
             newTurma.SetIDProfessor(professoresList[i].GetCodigo);
 
@@ -344,14 +352,14 @@ begin
           end;
          end;
 
-       for j := 0 to disciplinasList.Count -1 do
-         begin
-          if(cB_professor_T.Text = disciplinasList[j].getNome) then
-          begin
-            newTurma.SetIDDisciplina(disciplinasList[i].GetCodigo);
-            //break;
-          end;
-         end;
+      for j := 0 to disciplinasList.Count -1 do
+      begin
+        if(cb_disciplina_T.Text = disciplinasList[j].getNome) then
+        begin
+          newTurma.SetIDDisciplina(disciplinasList[j].GetCodigo);
+          //break;
+        end;
+      end;
 
         tempNameProfessor := newTurma.getNomeProfessorByID;
         tempNameDisciplina := newTurma.getNomeDisciplinaByID;
@@ -362,35 +370,8 @@ begin
         lstb_t_Disciplina.Items.Add(tempNameDisciplina);
         lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
 
-      end else begin
-        newTurma := TTurma.Create(professoresList.Count + 1);
 
-         for i := 0 to professoresList.Count -1  do
-         begin
-          if(cB_professor_T.SelText = professoresList[i].getNome) then
-          begin
-            newTurma.SetIDProfessor(professoresList[i].GetCodigo);
-            break;
-          end;
-         end;
-
-       for j := 0 to disciplinasList.Count -1 do
-         begin
-          if(cB_professor_T.SelText = disciplinasList[j].getNome) then
-          begin
-            newTurma.SetIDDisciplina(disciplinasList[i].GetCodigo);
-            break;
-          end;
-         end;
-
-        turmasList.Add(newTurma);
-
-        lstB_t_Professor.Items.Add(cB_professor_T.SelText);
-        lstb_t_Disciplina.Items.Add(cb_disciplina_T.SelText);
-        lstB_t_ID.Items.Add(newTurma.getCodigo.ToString);
-      end;
     end else if (iManager.ActualState = etEdit) then
-
     begin
       selectedItem := lstB_t_Professor.ItemIndex;
 
@@ -404,7 +385,7 @@ begin
     pnl_inputT.Visible := false;
     cB_professor_T.Text := '';
     cb_disciplina_T.Text := '';
-    jManager.UpdateProfessoresList();
+    jManager.UpdateTurmasList();
     iManager.ActualState := etBrowsing;
 
 end;

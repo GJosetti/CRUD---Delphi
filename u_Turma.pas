@@ -58,11 +58,11 @@ var i: Integer;
 var j: Integer;
 begin
 
-  for i := 0 to professoresList.Count -1 do
+  for i := 0 to disciplinasList.Count -1 do
   begin
-    if(Self.IDProfessor = professoresList[i].GetCodigo) then
+    if(Self.IDDisciplina = disciplinasList[i].GetCodigo) then
     begin
-      Result := professoresList[i].getNome;
+      Result := disciplinasList[i].getNome;
     end;
 
   end;
