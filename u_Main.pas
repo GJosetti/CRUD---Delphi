@@ -70,6 +70,10 @@ type
     lbl_cB_disciplina_T: TLabel;
     cb_disciplina_T: TComboBox;
     btn_Turmas: TButton;
+    lbl_Disciplina: TLabel;
+    lbl_Estudante: TLabel;
+    lbl_Professores: TLabel;
+    lbl_Turmas: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -77,7 +81,6 @@ type
     procedure btn_AdicionarClick(Sender: TObject);
     procedure btn_Remover_EClick(Sender: TObject);
     procedure btn_Editar_EClick(Sender: TObject);
-    procedure ListBox1Click(Sender: TObject);
     procedure btn_ProfessoresClick(Sender: TObject);
     procedure btn_Adicionar_PClick(Sender: TObject);
     procedure btn_concluir_inputPClick(Sender: TObject);
@@ -93,6 +96,7 @@ type
     procedure btn_TurmasClick(Sender: TObject);
     procedure btn_concluir_inputTClick(Sender: TObject);
     procedure btn_Remover_TClick(Sender: TObject);
+    procedure p_MainClick(Sender: TObject);
   private
     { Private declarations }
     
@@ -368,7 +372,7 @@ begin
 
 end;
 
-//CONCLUIR ADIÇÃO OU EDIÇÃO DE TURMAS
+
 
 
 
@@ -467,11 +471,10 @@ begin
   jManager := TjManager.Create;
   end;
 
-procedure Tf_Main.ListBox1Click(Sender: TObject);
+procedure Tf_Main.p_MainClick(Sender: TObject);
 begin
 
 end;
-
 
 //EDITAR DISCIPLINA
 procedure Tf_Main.btn_Editar_DClick(Sender: TObject);

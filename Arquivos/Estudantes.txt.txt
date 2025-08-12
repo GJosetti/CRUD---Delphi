@@ -1,1 +1,1 @@
-{"ownsObjects":true,"listHelper":[{"nome":"Pedro","codigo":3},{"nome":"Jo\u00E3o Pedro","codigo":4}]}
+{"ownsObjects":true,"listHelper":[{"nome":"Pedro","codigo":3},{"nome":"Jo\u00E3o Pedro","codigo":4},{"nome":"Jota (Jo\u00E3o Pedro)","codigo":5}]}

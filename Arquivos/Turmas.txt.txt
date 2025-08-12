@@ -1,1 +1,1 @@
-{"ownsObjects":true,"listHelper":[{"iDProfessor":2,"iDDisciplina":2,"codigo":1},{"iDProfessor":1,"iDDisciplina":1,"codigo":2}]}
+{"ownsObjects":true,"listHelper":[{"iDProfessor":2,"iDDisciplina":2,"codigo":1},{"iDProfessor":1,"iDDisciplina":1,"codigo":2},{"iDProfessor":2,"iDDisciplina":5,"codigo":3}]}
