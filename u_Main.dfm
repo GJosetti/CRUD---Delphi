@@ -880,7 +880,7 @@ object f_Main: Tf_Main
         Height = 25
         Caption = 'Concluir'
         TabOrder = 0
-        OnClick = btn_concluir_inputTClick
+        OnClick = btn_concluir_inputMClick
       end
       object cb_estudante_M: TComboBox
         Left = 24

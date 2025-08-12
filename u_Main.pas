@@ -118,6 +118,7 @@ type
     procedure btn_Remover_MClick(Sender: TObject);
     procedure btn_Editar_MClick(Sender: TObject);
     procedure btn_MatriculasClick(Sender: TObject);
+    procedure btn_concluir_inputMClick(Sender: TObject);
   private
     { Private declarations }
     
@@ -304,6 +305,60 @@ begin
 
 end;
 
+
+
+procedure Tf_Main.btn_concluir_inputMClick(Sender: TObject);
+var newMatricula: TMatricula;
+var selectedItem : Integer;
+var tempNameEstudante,tempNameTurma : string;
+begin
+
+
+
+ if(iManager.ActualState = etAdd) then
+    begin
+      //Verificação se é o primeiro
+      if matriculasList.Count > 0 then begin
+        newMatricula := TMatricula.Create(matriculasList.Last.GetCodigo + 1);
+
+      end else begin
+        newMatricula := TMatricula.Create(matriculasList.Count + 1);
+      end;
+
+     newMatricula.setIDEstudanteByNome(cb_estudante_M.Text);
+     newMatricula.setIDTurmaByNome(cb_turma_M.Text);
+
+
+     tempNameEstudante := newMatricula.getNomeEstudanteByID;
+     tempNameTurma := newMatricula.getNomeTurmaByID;
+
+     matriculasList.Add(newMatricula);
+
+     lstB_m_Estudante.Items.Add(tempNameEstudante);
+     lstb_m_turma.Items.Add(tempNameTurma);
+     lstB_m_ID.Items.Add(newMatricula.getCodigo.ToString);
+
+
+    end else if (iManager.ActualState = etEdit) then
+    begin
+
+          selectedItem := lstB_t_ID.ItemIndex;
+
+          turmasList[selectedItem].setIDProfessorByNome(cB_professor_T.Text);
+          turmasList[selectedItem].setIDDisciplinaByNome(cb_disciplina_T.Text);
+          lstB_t_Professor.Items[selectedItem] :=turmasList[selectedItem].getNomeProfessorByID;
+          lstb_t_Disciplina.Items[selectedItem] := turmasList[selectedItem].getNomeDisciplinaByID;
+
+    end;
+
+
+    pnl_inputT.Visible := false;
+    cB_professor_T.Text := '';
+    cb_disciplina_T.Text := '';
+    jManager.UpdateTurmasList();
+    iManager.ActualState := etBrowsing;
+
+end;
 
 
 //CONCLUIR ADIÇÃO OU EDIÇÃO DE PROFESSORES
