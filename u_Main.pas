@@ -92,9 +92,9 @@ type
     btn_concluir_inputM: TButton;
     cb_estudante_M: TComboBox;
     cb_turma_M: TComboBox;
-    img_Main: TImage;
     lbl_Main: TLabel;
     lbl_img_Main: TLabel;
+    img_Main: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
@@ -490,8 +490,9 @@ end;
 procedure Tf_Main.FormCreate(Sender: TObject);
 
 begin
-  //Instanciando Listas
+  img_Main.Picture.LoadFromFile('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\HideoKojimaInfobox.webp');
 
+  //Instanciando Listas
   //Estudantes
   if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Estudantes.txt.txt')) then
   begin

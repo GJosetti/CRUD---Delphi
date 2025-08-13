@@ -833,7 +833,7 @@ object f_Main: Tf_Main
       ParentFont = False
     end
     object lbl_img_Main: TLabel
-      Left = 96
+      Left = 79
       Top = 583
       Width = 364
       Height = 25
@@ -846,9 +846,9 @@ object f_Main: Tf_Main
       ParentFont = False
     end
     object img_Main: TImage
-      Left = 99
-      Top = 208
-      Width = 361
+      Left = 75
+      Top = 176
+      Width = 359
       Height = 361
       Picture.Data = {
         0A54536B4772617068696389504E470D0A1A0A0000000D494844520000016800
