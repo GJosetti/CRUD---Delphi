@@ -648,7 +648,6 @@ object f_Main: Tf_Main
     ParentBackground = False
     TabOrder = 0
     OnClick = p_MainClick
-    ExplicitLeft = -1
     object btn_Estudantes: TButton
       Left = 784
       Top = 136
@@ -735,8 +734,6 @@ object f_Main: Tf_Main
     ShowCaption = False
     TabOrder = 5
     Visible = False
-    ExplicitLeft = 64
-    ExplicitTop = 87
     object lbl_Matriculas: TLabel
       Left = 1
       Top = 1
