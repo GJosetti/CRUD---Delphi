@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, u_ScreenManager,
-  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager, u_JsonManager,u_Disciplina,u_Matricula,u_Turma;
+  Vcl.StdCtrls, System.Generics.Collections, u_Pessoa, u_Estudante,u_Professor,  System.JSON, Rest.Json,  System.IOUtils, u_ID, u_InputManager, u_JsonManager,u_Disciplina,u_Matricula,u_Turma,
+  Vcl.Skia;
 
 
 
@@ -91,6 +92,9 @@ type
     btn_concluir_inputM: TButton;
     cb_estudante_M: TComboBox;
     cb_turma_M: TComboBox;
+    img_Main: TImage;
+    lbl_Main: TLabel;
+    lbl_img_Main: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btn_EstudantesClick(Sender: TObject);
     procedure btn_Back_EClick(Sender: TObject);
