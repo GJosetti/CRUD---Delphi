@@ -46,7 +46,7 @@ end;
 procedure TJManager.UpdateTurmasList();
 begin
   jsonStr := TJson.ObjectToJsonString(turmasList);
-  TFile.WriteAllText('C:\Users\Users\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Turmas.txt.txt',jsonStr);
+  TFile.WriteAllText('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Turmas.txt.txt',jsonStr);
 end;
 
 //DAR UPDATE NO ARQUIVO Matriculas JSON

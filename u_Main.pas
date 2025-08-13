@@ -352,10 +352,10 @@ begin
     end;
 
 
-    pnl_inputT.Visible := false;
-    cB_professor_T.Text := '';
-    cb_disciplina_T.Text := '';
-    jManager.UpdateTurmasList();
+    pnl_inputM.Visible := false;
+    cB_estudante_M.Text := '';
+    cb_turma_M.Text := '';
+    jManager.UpdateMatriculasList();
     iManager.ActualState := etBrowsing;
 
 end;
@@ -681,7 +681,7 @@ begin
 
        lstB_M_ID.Items.Add(matriculasList[i].GetCodigo.ToString);
 
-      for j := 0 to professoresList.Count - 1  do
+      for j := 0 to estudantesList.Count - 1  do
       begin
            if(matriculasList[i].getIDEstudante = estudantesList[j].GetCodigo) then
            begin
@@ -692,7 +692,7 @@ begin
       begin
            if(matriculasList[i].getIDTurma = turmasList[k].GetCodigo) then
            begin
-              lstb_m_Turma.Items.Add(turmasList[k].GetCodigo.ToString + ' - ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID);
+              lstb_m_Turma.Items.Add(turmasList[k].GetCodigo.ToString + ' - ' + turmasList[k].getNomeProfessorByID + ' -> ' + turmasList[k].getNomeDisciplinaByID);
            end;
       end;
 

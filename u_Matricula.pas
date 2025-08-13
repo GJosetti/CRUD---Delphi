@@ -45,7 +45,7 @@ function TMatricula.getNomeEstudanteByID: string;
 var i: Integer;
 begin
 
-  for i := 0 to matriculasList.Count -1 do
+  for i := 0 to estudantesList.Count -1 do
   begin
     if(Self.IDEstudante = estudantesList[i].GetCodigo) then
     begin
@@ -59,9 +59,9 @@ function TMatricula.getNomeTurmaByID: string;
 var i: Integer;
 begin
 
-  for i := 0 to matriculasList.Count -1 do
+  for i := 0 to turmasList.Count -1 do
   begin
-    if(Self.IDEstudante = turmasList[i].GetCodigo) then
+    if(Self.IDTurma = turmasList[i].GetCodigo) then
     begin
       Result := turmasList[i].GetCodigo.ToString + ' - ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID;
     end;
@@ -93,14 +93,13 @@ begin
 end;
 
 procedure TMatricula.setIDTurmaByNome(aNome: string);
-begin
-
 var i : Integer;
 begin
 
+
   for i := 0 to turmasList.Count -1  do
   begin
-    if(aNome = (turmasList[i].GetCodigo).ToString + ' - ' + 'Professor(a) ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID)   then
+    if(aNome = (turmasList[i].GetCodigo.ToString + ' - ' + turmasList[i].getNomeProfessorByID + ' -> ' + turmasList[i].getNomeDisciplinaByID))   then
     begin
       Self.SetIDTurma(turmasList[i].GetCodigo);
       break;
@@ -108,6 +107,6 @@ begin
   end;
 end;
 
-end;
+
 
 end.
