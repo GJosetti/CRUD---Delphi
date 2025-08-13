@@ -493,9 +493,9 @@ begin
   //Instanciando Listas
 
   //Estudantes
-  if(TFile.Exists('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Estudantes.txt.txt')) then
+  if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Estudantes.txt.txt')) then
   begin
-    jsonStr := Tfile.ReadAllText('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Estudantes.txt.txt');
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Estudantes.txt.txt');
     estudantesList := TJson.JsonToObject<TObjectList<TEstudante>>(jsonStr);
   end;
 
@@ -506,9 +506,9 @@ begin
   end;
 
   //Professores
-    if(TFile.Exists('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Professores.txt.txt')) then
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Professores.txt.txt')) then
   begin
-    jsonStr := Tfile.ReadAllText('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Professores.txt.txt');
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Professores.txt.txt');
     professoresList := TJson.JsonToObject<TObjectList<TProfessor>>(jsonStr);
   end;
 
@@ -519,9 +519,9 @@ begin
 
 
   //Disciplinas
-    if(TFile.Exists('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Disciplinas.txt.txt')) then
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Disciplinas.txt.txt')) then
   begin
-    jsonStr := Tfile.ReadAllText('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Disciplinas.txt.txt');
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Disciplinas.txt.txt');
     disciplinasList := TJson.JsonToObject<TObjectList<TDisciplina>>(jsonStr);
   end;
 
@@ -531,9 +531,9 @@ begin
   end;
 
    //Turmas
-    if(TFile.Exists('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Turmas.txt.txt')) then
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Turmas.txt.txt')) then
   begin
-    jsonStr := Tfile.ReadAllText('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Turmas.txt.txt');
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Turmas.txt.txt');
     turmasList := TJson.JsonToObject<TObjectList<TTurma>>(jsonStr);
   end;
 
@@ -543,9 +543,9 @@ begin
   end;
 
   //Matriculas
-    if(TFile.Exists('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Matrículas.txt.txt')) then
+    if(TFile.Exists('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Matrículas.txt.txt')) then
   begin
-    jsonStr := Tfile.ReadAllText('C:\Users\User\Desktop\CRUD DELPHI\CRUD---Delphi\Arquivos\Matrículas.txt.txt');
+    jsonStr := Tfile.ReadAllText('C:\Users\Guilherme Josetti\Desktop\CRUD -- DELPHI\CRUD---Delphi\Arquivos\Matrículas.txt.txt');
     matriculasList := TJson.JsonToObject<TObjectList<TMatricula>>(jsonStr);
   end;
 
