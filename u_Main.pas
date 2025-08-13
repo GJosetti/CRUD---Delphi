@@ -116,6 +116,7 @@ type
     procedure p_MainClick(Sender: TObject);
     procedure btn_Adicionar_MClick(Sender: TObject);
     procedure btn_Remover_MClick(Sender: TObject);
+    function FindTurmaByID(const AID: Integer; ALista: TObjectList<TTurma>): TTurma;
     procedure btn_Editar_MClick(Sender: TObject);
     procedure btn_MatriculasClick(Sender: TObject);
     procedure btn_concluir_inputMClick(Sender: TObject);
@@ -306,7 +307,7 @@ begin
 end;
 
 
-
+//CONCLUIR ADIÇÃO E EDIÇÃO DE MATRÍCULAS
 procedure Tf_Main.btn_concluir_inputMClick(Sender: TObject);
 var newMatricula: TMatricula;
 var selectedItem : Integer;
@@ -342,12 +343,12 @@ begin
     end else if (iManager.ActualState = etEdit) then
     begin
 
-          selectedItem := lstB_t_ID.ItemIndex;
+          selectedItem := lstB_m_ID.ItemIndex;
 
-          turmasList[selectedItem].setIDProfessorByNome(cB_professor_T.Text);
-          turmasList[selectedItem].setIDDisciplinaByNome(cb_disciplina_T.Text);
-          lstB_t_Professor.Items[selectedItem] :=turmasList[selectedItem].getNomeProfessorByID;
-          lstb_t_Disciplina.Items[selectedItem] := turmasList[selectedItem].getNomeDisciplinaByID;
+          matriculasList[selectedItem].setIDEstudanteByNome(cB_estudante_M.Text);
+          matriculasList[selectedItem].setIDTurmaByNome(cb_turma_M.Text);
+          lstB_m_estudante.Items[selectedItem] :=matriculasList[selectedItem].getNomeEstudanteByID;
+          lstb_m_turma.Items[selectedItem] := matriculasList[selectedItem].getNomeTurmaByID;
 
     end;
 
@@ -464,6 +465,22 @@ end;
 
 
 
+//BUSCA DO OBJETO PELO ID
+function Tf_Main.FindTurmaByID(const AID: Integer;
+  ALista: TObjectList<TTurma>): TTurma;
+var
+  turma: TTurma;
+begin
+  Result := nil;
+  for turma in ALista do
+  begin
+    if turma.GetCodigo = AID then
+    begin
+      Result := turma;
+      Exit;
+    end;
+  end;
+end;
 
 //FORM CREATE -------------------------------------------------------------
 procedure Tf_Main.FormCreate(Sender: TObject);
@@ -582,15 +599,47 @@ begin
   end;
 end;
 
+//EDITAR MATRÍCULAS
 procedure Tf_Main.btn_Editar_MClick(Sender: TObject);
-var selectedItem: Integer;
+var
+  selectedItem: Integer;
+  matriculaSelecionada: TMatricula;
+  turmaDaMatricula: TTurma;
+  idTurmaParaBuscar: Integer;
 begin
+  selectedItem := lstB_m_ID.ItemIndex;
+
+  if selectedItem = -1 then
+  begin
+    ShowMessage('Por favor, selecione uma matrícula para editar.');
+    Exit;
+  end;
+
   iManager.ActualState := etEdit;
   pnl_inputM.Visible := true;
 
-  selectedItem := lstB_m_ID.ItemIndex;
-  cB_estudante_M.TextHint := matriculasList[selectedItem].getNomeEstudanteByID();
-  cb_turma_M.TextHint := matriculasList[selectedItem].GetCodigo.ToString + ' - ' + turmasList[selectedItem].getNomeProfessorByID + ' -> ' + turmasList[selectedItem].getNomeDisciplinaByID;;
+  matriculaSelecionada := matriculasList[selectedItem];
+
+
+  cB_estudante_M.TextHint := matriculaSelecionada.getNomeEstudanteByID();
+
+
+  idTurmaParaBuscar := matriculaSelecionada.getIDTurma;
+  turmaDaMatricula := FindTurmaByID(idTurmaParaBuscar, turmasList);
+
+
+  if Assigned(turmaDaMatricula) then
+  begin
+
+    cb_turma_M.TextHint := turmaDaMatricula.GetCodigo.ToString + ' - ' +
+                           turmaDaMatricula.getNomeProfessorByID + ' -> ' +
+                           turmaDaMatricula.getNomeDisciplinaByID;
+  end
+  else
+  begin
+
+    cb_turma_M.TextHint := 'Turma não encontrada!';
+  end;
 end;
 
 //EDITAR PROFESSOR
@@ -649,7 +698,7 @@ begin
 
 end;
 
-
+//ENTRAR NA ABA MATRÍCULAS
 procedure Tf_Main.btn_MatriculasClick(Sender: TObject);
 var i : Integer;
 var j: Integer;
